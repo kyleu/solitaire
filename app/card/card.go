@@ -30,11 +30,11 @@ func FromCardString(str string) (*Card, error) {
 
 	if idx := strings.Index(str, ":"); idx > -1 {
 		idStr := str[:idx]
-		id, err := strconv.Atoi(idStr)
+		id, err := strconv.ParseInt(idStr, 10, 32)
 		if err != nil {
 			return nil, errors.Wrapf(err, "invalid card id [%s]", idStr)
 		}
-		ret.ID = id
+		ret.ID = int(id)
 		str = str[idx+1:]
 	}
 	if str == "" {
