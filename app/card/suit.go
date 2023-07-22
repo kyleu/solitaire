@@ -41,7 +41,7 @@ func (s *Suit) ReplaceFrom(x *Suit) {
 var (
 	SuitHearts   = &Suit{Index: 0, Key: "H", Name: "Hearts", Color: ColorRed}
 	SuitSpades   = &Suit{Index: 1, Key: "S", Name: "Spades", Color: ColorBlack}
-	SuitDiamonds = &Suit{Index: 2, Key: "D", Name: "Diamond", Color: ColorRed}
+	SuitDiamonds = &Suit{Index: 2, Key: "D", Name: "Diamonds", Color: ColorRed}
 	SuitClubs    = &Suit{Index: 3, Key: "C", Name: "Clubs", Color: ColorBlack}
 
 	SuitHorseshoes = &Suit{Index: 4, Key: "O", Name: "Horseshoes", Color: ColorRed}
