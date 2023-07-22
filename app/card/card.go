@@ -2,10 +2,12 @@ package card
 
 import (
 	"fmt"
-	"github.com/kyleu/solitaire/app/util"
-	"github.com/pkg/errors"
 	"strconv"
 	"strings"
+
+	"github.com/pkg/errors"
+
+	"github.com/kyleu/solitaire/app/util"
 )
 
 type Card struct {
@@ -15,11 +17,11 @@ type Card struct {
 	FaceUp bool  `json:"u,omitempty"`
 }
 
-func NewCard(r *Rank, s *Suit) *Card {
+func NewCardOld(r *Rank, s *Suit) *Card {
 	return &Card{Rank: r, Suit: s}
 }
 
-func NewCardID(id int, r *Rank, s *Suit, u bool) *Card {
+func NewCard(id int, r *Rank, s *Suit, u bool) *Card {
 	return &Card{ID: id, Rank: r, Suit: s, FaceUp: u}
 }
 
@@ -66,6 +68,10 @@ func (c *Card) Equals(x *Card) bool {
 	return c.ID == x.ID && c.Rank == x.Rank && c.Suit == x.Suit && c.FaceUp == x.FaceUp
 }
 
+func (c *Card) EqualsSimple(x *Card) bool {
+	return c.Rank == x.Rank && c.Suit == x.Suit
+}
+
 func (c *Card) String() string {
 	var ret string
 	if c.ID != 0 {
@@ -92,6 +98,13 @@ func (c *Card) UnmarshalJSON(data []byte) error {
 	if err != nil {
 		return err
 	}
-	c = curr
+	c.ReplaceFrom(curr)
 	return nil
+}
+
+func (c *Card) ReplaceFrom(x *Card) {
+	c.ID = x.ID
+	c.Rank = x.Rank
+	c.Suit = x.Suit
+	c.FaceUp = x.FaceUp
 }

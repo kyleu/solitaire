@@ -1,8 +1,9 @@
 package card
 
 import (
-	"github.com/kyleu/solitaire/app/util"
 	"github.com/pkg/errors"
+
+	"github.com/kyleu/solitaire/app/util"
 )
 
 type Suit struct {
@@ -26,8 +27,15 @@ func (s *Suit) UnmarshalJSON(data []byte) error {
 	if !ok {
 		return errors.Wrapf(err, "Incorrect suit key [%s]", string(data))
 	}
-	s = curr
+	s.ReplaceFrom(curr)
 	return nil
+}
+
+func (s *Suit) ReplaceFrom(x *Suit) {
+	s.Index = x.Index
+	s.Key = x.Key
+	s.Name = x.Name
+	s.Color = x.Color
 }
 
 var (

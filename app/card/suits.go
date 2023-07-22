@@ -1,8 +1,9 @@
 package card
 
 import (
-	"github.com/kyleu/solitaire/app/util"
 	"golang.org/x/exp/slices"
+
+	"github.com/kyleu/solitaire/app/util"
 )
 
 type Suits []*Suit
@@ -19,19 +20,17 @@ func (s Suits) Random() *Suit {
 	return s[util.RandomInt(len(s))]
 }
 
-var (
-	suitsByKey = map[string]*Suit{
-		SuitHearts.Key:   SuitHearts,
-		SuitSpades.Key:   SuitSpades,
-		SuitDiamonds.Key: SuitDiamonds,
-		SuitClubs.Key:    SuitClubs,
+var suitsByKey = map[string]*Suit{
+	SuitHearts.Key:   SuitHearts,
+	SuitSpades.Key:   SuitSpades,
+	SuitDiamonds.Key: SuitDiamonds,
+	SuitClubs.Key:    SuitClubs,
 
-		SuitHorseshoes.Key: SuitHorseshoes,
-		SuitStars.Key:      SuitStars,
-		SuitTridents.Key:   SuitTridents,
-		SuitMoons.Key:      SuitMoons,
+	SuitHorseshoes.Key: SuitHorseshoes,
+	SuitStars.Key:      SuitStars,
+	SuitTridents.Key:   SuitTridents,
+	SuitMoons.Key:      SuitMoons,
 
-		SuitSuitless.Key: SuitSuitless,
-		SuitUnknown.Key:  SuitUnknown,
-	}
-)
+	SuitSuitless.Key: SuitSuitless,
+	SuitUnknown.Key:  SuitUnknown,
+}

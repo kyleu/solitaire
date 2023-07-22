@@ -1,8 +1,9 @@
 package card
 
 import (
-	"github.com/kyleu/solitaire/app/util"
 	"golang.org/x/exp/slices"
+
+	"github.com/kyleu/solitaire/app/util"
 )
 
 type Ranks []*Rank

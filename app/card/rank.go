@@ -1,8 +1,9 @@
 package card
 
 import (
-	"github.com/kyleu/solitaire/app/util"
 	"github.com/pkg/errors"
+
+	"github.com/kyleu/solitaire/app/util"
 )
 
 type Rank struct {
@@ -16,11 +17,11 @@ func newRank(idx int, key string, name string) *Rank {
 	return &Rank{Index: idx, Key: key, Name: name, Plural: util.StringToPlural(name)}
 }
 
-func (s *Rank) MarshalJSON() ([]byte, error) {
-	return util.ToJSONBytes(s.Key, false), nil
+func (r *Rank) MarshalJSON() ([]byte, error) {
+	return util.ToJSONBytes(r.Key, false), nil
 }
 
-func (s *Rank) UnmarshalJSON(data []byte) error {
+func (r *Rank) UnmarshalJSON(data []byte) error {
 	var key string
 	err := util.FromJSON(data, &key)
 	if err != nil {
@@ -30,8 +31,15 @@ func (s *Rank) UnmarshalJSON(data []byte) error {
 	if !ok {
 		return errors.Wrapf(err, "Incorrect rank key [%s]", string(data))
 	}
-	s = curr
+	r.ReplaceFrom(curr)
 	return nil
+}
+
+func (r *Rank) ReplaceFrom(x *Rank) {
+	r.Index = x.Index
+	r.Key = x.Key
+	r.Name = x.Name
+	r.Plural = x.Plural
 }
 
 var (

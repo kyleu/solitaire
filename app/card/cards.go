@@ -1,9 +1,10 @@
 package card
 
 import (
-	"github.com/kyleu/solitaire/app/util"
 	"github.com/samber/lo"
 	"golang.org/x/exp/slices"
+
+	"github.com/kyleu/solitaire/app/util"
 )
 
 type Cards []*Card
@@ -76,6 +77,32 @@ func (c Cards) MaxSuit() *Suit {
 		}
 	})
 	return ret
+}
+
+func (c Cards) Equals(x Cards) bool {
+	if len(c) != len(x) {
+		return false
+	}
+	for idx, l := range c {
+		r := x[idx]
+		if !l.Equals(r) {
+			return false
+		}
+	}
+	return true
+}
+
+func (c Cards) EqualsSimple(x Cards) bool {
+	if len(c) != len(x) {
+		return false
+	}
+	for idx, l := range c {
+		r := x[idx]
+		if !l.EqualsSimple(r) {
+			return false
+		}
+	}
+	return true
 }
 
 func RandomCards(amount int, suits Suits, offset int) Cards {

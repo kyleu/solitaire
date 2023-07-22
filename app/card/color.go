@@ -1,8 +1,9 @@
 package card
 
 import (
-	"github.com/kyleu/solitaire/app/util"
 	"github.com/pkg/errors"
+
+	"github.com/kyleu/solitaire/app/util"
 )
 
 type Color struct {
@@ -10,11 +11,11 @@ type Color struct {
 	Name string
 }
 
-func (s *Color) MarshalJSON() ([]byte, error) {
-	return util.ToJSONBytes(s.Key, false), nil
+func (c *Color) MarshalJSON() ([]byte, error) {
+	return util.ToJSONBytes(c.Key, false), nil
 }
 
-func (s *Color) UnmarshalJSON(data []byte) error {
+func (c *Color) UnmarshalJSON(data []byte) error {
 	var key string
 	err := util.FromJSON(data, &key)
 	if err != nil {
@@ -24,8 +25,13 @@ func (s *Color) UnmarshalJSON(data []byte) error {
 	if !ok {
 		return errors.Wrapf(err, "Incorrect color key [%s]", string(data))
 	}
-	s = curr
+	c.ReplaceFrom(curr)
 	return nil
+}
+
+func (c *Color) ReplaceFrom(x *Color) {
+	c.Key = x.Key
+	c.Name = x.Name
 }
 
 var (

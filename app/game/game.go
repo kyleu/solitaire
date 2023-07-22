@@ -1,4 +1,3 @@
 package game
 
-type Game struct {
-}
+type Game struct{}

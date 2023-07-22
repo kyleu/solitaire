@@ -1,4 +1,3 @@
 package pile
 
-type Options struct {
-}
+type Options struct{}

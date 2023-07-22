@@ -1,10 +1,12 @@
 package rules
 
 import (
-	"github.com/kyleu/solitaire/app/card"
+	"strings"
+
 	"github.com/samber/lo"
 	"golang.org/x/exp/slices"
-	"strings"
+
+	"github.com/kyleu/solitaire/app/card"
 )
 
 type HandType struct {
@@ -66,7 +68,7 @@ func CheckPoker(cards card.Cards) *PokerResult {
 		if fullHousePair := hasRankCount(2, ranksCount, threeOfAKind); fullHousePair != nil {
 			threeCrds := cards.WithRank(threeOfAKind, 3)
 			twoCards := cards.WithRank(fullHousePair, 2)
-			crds := append(threeCrds, twoCards...)
+			crds := append(slices.Clone(threeCrds), twoCards...)
 			msg := "Full house (" + threeOfAKind.Plural + " over " + fullHousePair.Plural + ")"
 			return newResult(crds, HandTypeFullHouse, threeCrds.MaxRank().Index, msg)
 		}

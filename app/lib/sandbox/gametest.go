@@ -2,11 +2,11 @@ package sandbox
 
 import (
 	"context"
+
+	"github.com/kyleu/solitaire/app"
 	"github.com/kyleu/solitaire/app/card"
 	"github.com/kyleu/solitaire/app/pile"
 	"github.com/kyleu/solitaire/app/rules"
-
-	"github.com/kyleu/solitaire/app"
 	"github.com/kyleu/solitaire/app/util"
 )
 
