@@ -1,0 +1,23 @@
+<!-- Content managed by Project Forge, see [projectforge.md] for details. -->
+{% import (
+  "github.com/kyleu/solitaire/app"
+  "github.com/kyleu/solitaire/app/controller/cutil"
+  "github.com/kyleu/solitaire/views/components"
+  "github.com/kyleu/solitaire/views/layout"
+) %}
+
+{% code type Run struct {
+  layout.Basic
+  Key string
+  Title string
+  Icon string
+  Result any
+} %}
+
+{% func (p *Run) Body(as *app.State, ps *cutil.PageState) %}
+  <div class="card">
+    <h3>{%= components.SVGRefIcon(p.Icon, ps) %}{%s p.Title %}</h3>
+    {%= components.JSON(p.Result) %}
+  </div>
+{% endfunc %}
+

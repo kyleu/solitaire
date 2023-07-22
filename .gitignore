@@ -1,0 +1,12 @@
+/.env
+/.vscode
+/.idea
+/.scannerwork
+/build
+/tmp
+
+/assets/wasm/solitaire.wasm
+
+/client/node_modules
+
+.DS_Store
