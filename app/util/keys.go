@@ -4,7 +4,7 @@ package util
 const (
 	AppKey     = "solitaire"
 	AppName    = "Solitaire"
-	AppSummary = "..."
+	AppSummary = "A solitaire game... details soon"
 	AppPort    = 7777
 	AppContact = "Kyle U <solitaire@kyleu.com>"
 	AppURL     = "https://github.com/kyleu/solitaire"

@@ -1,14 +1,14 @@
 # Content managed by Project Forge, see [projectforge.md] for details.
 source = ["./build/dist/darwin_darwin_all/solitaire"]
-bundle_id = ""
+bundle_id = "dev.kyleu.solitaire"
 
 notarize {
   path = "./build/dist/solitaire_0.0.1_darwin_all_desktop.dmg"
-  bundle_id = ""
+  bundle_id = "dev.kyleu.solitaire"
 }
 
 apple_id {
-  username = "solitaire@kyleu.com"
+  username = "kyle@kyleu.com"
   password = "@env:APPLE_PASSWORD"
 }
 

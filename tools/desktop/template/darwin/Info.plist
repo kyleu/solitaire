@@ -9,7 +9,7 @@
     <key>CFBundleIconFile</key>
     <string>icons</string>
     <key>CFBundleIdentifier</key>
-    <string></string>
+    <string>dev.kyleu.solitaire</string>
     <key>CFBundleName</key>
     <string>Solitaire</string>
     <key>CFBundlePackageType</key>

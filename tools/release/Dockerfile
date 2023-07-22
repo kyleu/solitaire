@@ -5,7 +5,7 @@ LABEL "org.opencontainers.image.authors"="Kyle U"
 LABEL "org.opencontainers.image.source"="https://github.com/kyleu/solitaire"
 LABEL "org.opencontainers.image.vendor"="kyleu"
 LABEL "org.opencontainers.image.title"="Solitaire"
-LABEL "org.opencontainers.image.description"="..."
+LABEL "org.opencontainers.image.description"="A solitaire game... details soon"
 
 RUN apk add --update --no-cache ca-certificates libc6-compat
 
