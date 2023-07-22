@@ -15,7 +15,6 @@ The following modules were used to build this project:
 - [jsx](./doc/module/jsx.md)
 - [marketing](./doc/module/marketing.md)
 - [notarize](./doc/module/notarize.md)
-- [process](./doc/module/process.md)
 - [sandbox](./doc/module/sandbox.md)
 - [search](./doc/module/search.md)
 - [themecatalog](./doc/module/themecatalog.md)

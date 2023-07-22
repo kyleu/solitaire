@@ -4,19 +4,16 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/kyleu/solitaire/app/lib/exec"
 	"github.com/kyleu/solitaire/app/lib/websocket"
 	"github.com/kyleu/solitaire/app/util"
 )
 
 type Services struct {
-	Exec   *exec.Service
 	Socket *websocket.Service
 }
 
 func NewServices(ctx context.Context, st *State, logger util.Logger) (*Services, error) {
 	return &Services{
-		Exec:   exec.NewService(),
 		Socket: websocket.NewService(nil, socketHandler, nil),
 	}, nil
 }
