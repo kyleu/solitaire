@@ -12,7 +12,7 @@ type Services struct {
 	Socket *websocket.Service
 }
 
-func NewServices(ctx context.Context, st *State, logger util.Logger) (*Services, error) {
+func NewServices(_ context.Context, _ *State, _ util.Logger) (*Services, error) {
 	return &Services{
 		Socket: websocket.NewService(nil, socketHandler, nil),
 	}, nil
