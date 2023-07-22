@@ -5,7 +5,7 @@
 /build
 /tmp
 
-/assets/wasm/solitaire.wasm
+/assets/wasm/*.wasm
 
 /client/node_modules
 
