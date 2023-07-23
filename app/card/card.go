@@ -2,13 +2,13 @@ package card
 
 import (
 	"fmt"
-	"github.com/kyleu/solitaire/app/rank"
-	"github.com/kyleu/solitaire/app/suit"
 	"strconv"
 	"strings"
 
 	"github.com/pkg/errors"
 
+	"github.com/kyleu/solitaire/app/rank"
+	"github.com/kyleu/solitaire/app/suit"
 	"github.com/kyleu/solitaire/app/util"
 )
 

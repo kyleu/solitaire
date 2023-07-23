@@ -2,8 +2,10 @@ package suit
 
 import (
 	"fmt"
-	"github.com/kyleu/solitaire/app/util"
+
 	"github.com/pkg/errors"
+
+	"github.com/kyleu/solitaire/app/util"
 )
 
 type Suit uint8

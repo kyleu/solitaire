@@ -4,11 +4,11 @@ package card_test
 
 import (
 	"fmt"
-	"github.com/kyleu/solitaire/app/rank"
-	"github.com/kyleu/solitaire/app/suit"
 	"testing"
 
 	"github.com/kyleu/solitaire/app/card"
+	"github.com/kyleu/solitaire/app/rank"
+	"github.com/kyleu/solitaire/app/suit"
 	"github.com/kyleu/solitaire/app/util"
 )
 

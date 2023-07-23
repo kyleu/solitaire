@@ -2,6 +2,7 @@ package rank
 
 import (
 	"fmt"
+
 	"github.com/pkg/errors"
 
 	"github.com/kyleu/solitaire/app/util"
