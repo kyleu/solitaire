@@ -27,7 +27,7 @@ func AppRoutes(as *app.State, logger util.Logger) fasthttp.RequestHandler {
 	themeRoutes(r)
 
 	// $PF_SECTION_START(routes)$
-	// Add your custom routes here
+	r.GET("/game", controller.Game)
 	// $PF_SECTION_END(routes)$
 
 	r.GET("/graphql", controller.GraphQLIndex)
