@@ -18,6 +18,10 @@ func (d *Deck) EqualsSimple(x *Deck) bool {
 	return d.Cards.EqualsSimple(x.Cards)
 }
 
+func (d *Deck) Empty() bool {
+	return len(d.Cards) == 0
+}
+
 func FreshDeck(numLoops int, ranks card.Ranks, suits card.Suits, faceUp bool, idOffset int) *Deck {
 	if len(ranks) == 0 {
 		ranks = card.RanksAll

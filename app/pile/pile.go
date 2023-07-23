@@ -7,3 +7,7 @@ type Pile struct {
 	Options *Options   `json:"options,omitempty"`
 	Cards   card.Cards `json:"cards,omitempty"`
 }
+
+func (p *Pile) Empty() bool {
+	return len(p.Cards) == 0
+}
