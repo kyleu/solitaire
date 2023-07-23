@@ -3,6 +3,7 @@ package constraint
 import (
 	"github.com/kyleu/solitaire/app/card"
 	"github.com/kyleu/solitaire/app/pile"
+	"github.com/kyleu/solitaire/app/rank"
 	"github.com/kyleu/solitaire/app/util"
 	"github.com/samber/lo"
 )
@@ -69,11 +70,11 @@ func FaceDown(id string) *Constraint {
 	}, nil)
 }
 
-func SpecificRanks(id string, ranks ...card.Rank) *Constraint {
+func SpecificRanks(id string, ranks ...rank.Rank) *Constraint {
 	return newConstraint(id, func(_ *pile.Pile, _ pile.Pile, cards card.Cards, _ any) bool {
 		return lo.EveryBy(cards, func(c *card.Card) bool {
-			return lo.ContainsBy(ranks, func(r card.Rank) bool {
-				return r.Key == c.Rank.Key
+			return lo.ContainsBy(ranks, func(r rank.Rank) bool {
+				return r == c.Rank
 			})
 		})
 	}, nil)

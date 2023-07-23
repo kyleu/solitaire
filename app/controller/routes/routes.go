@@ -28,6 +28,9 @@ func AppRoutes(as *app.State, logger util.Logger) fasthttp.RequestHandler {
 
 	// $PF_SECTION_START(routes)$
 	r.GET("/game", controller.Game)
+	r.GET("/game/test/json", controller.GameTestJSON)
+	r.GET("/game/test/html", controller.GameTestHTML)
+	r.GET("/game/test/wasm", controller.GameTestWASM)
 	// $PF_SECTION_END(routes)$
 
 	r.GET("/graphql", controller.GraphQLIndex)

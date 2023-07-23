@@ -11,3 +11,5 @@ type Pile struct {
 func (p *Pile) Empty() bool {
 	return len(p.Cards) == 0
 }
+
+type Piles []*Pile

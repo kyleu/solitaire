@@ -1,0 +1,19 @@
+{% import (
+  "github.com/kyleu/solitaire/app"
+  "github.com/kyleu/solitaire/app/controller/cutil"
+  "github.com/kyleu/solitaire/views/layout"
+) %}
+
+{% code type Index struct {
+  layout.Basic
+} %}
+
+{% func (p *Index) Body(as *app.State, ps *cutil.PageState) %}
+  <div class="card">
+    <h3>Game Tests</h3>
+    <ul class="mt">
+      <li><a href="/game/test/html">HTML</a></li>
+      <li><a href="/game/test/wasm">WASM</a></li>
+    </ul>
+  </div>
+{% endfunc %}

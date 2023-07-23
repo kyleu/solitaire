@@ -4,6 +4,8 @@ package card_test
 
 import (
 	"fmt"
+	"github.com/kyleu/solitaire/app/rank"
+	"github.com/kyleu/solitaire/app/suit"
 	"testing"
 
 	"github.com/kyleu/solitaire/app/card"
@@ -16,11 +18,11 @@ type cardSerializeTest struct {
 }
 
 var cardSerializeTests = []*cardSerializeTest{
-	{k: "AH", c: card.NewCard(0, card.RankAce, card.SuitHearts, false)},
-	{k: "AH+", c: card.NewCard(0, card.RankAce, card.SuitHearts, true)},
-	{k: "1:AH", c: card.NewCard(1, card.RankAce, card.SuitHearts, false)},
-	{k: "1:AH+", c: card.NewCard(1, card.RankAce, card.SuitHearts, true)},
-	{k: "KS", c: card.NewCard(0, card.RankKing, card.SuitSpades, false)},
+	{k: "AH", c: card.NewCard(0, rank.RankAce, suit.Hearts, false)},
+	{k: "AH+", c: card.NewCard(0, rank.RankAce, suit.Hearts, true)},
+	{k: "1:AH", c: card.NewCard(1, rank.RankAce, suit.Hearts, false)},
+	{k: "1:AH+", c: card.NewCard(1, rank.RankAce, suit.Hearts, true)},
+	{k: "KS", c: card.NewCard(0, rank.RankKing, suit.Spades, false)},
 }
 
 func TestSerialize(t *testing.T) {

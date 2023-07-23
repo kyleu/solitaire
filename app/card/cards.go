@@ -1,6 +1,8 @@
 package card
 
 import (
+	"github.com/kyleu/solitaire/app/rank"
+	"github.com/kyleu/solitaire/app/suit"
 	"github.com/samber/lo"
 	"golang.org/x/exp/slices"
 
@@ -9,19 +11,19 @@ import (
 
 type Cards []*Card
 
-func (c Cards) Ranks() Ranks {
-	return lo.Map(c, func(crd *Card, _ int) *Rank {
+func (c Cards) Ranks() rank.Ranks {
+	return lo.Map(c, func(crd *Card, _ int) rank.Rank {
 		return crd.Rank
 	})
 }
 
-func (c Cards) Suits() Suits {
-	return lo.Map(c, func(crd *Card, _ int) *Suit {
+func (c Cards) Suits() suit.Suits {
+	return lo.Map(c, func(crd *Card, _ int) suit.Suit {
 		return crd.Suit
 	})
 }
 
-func (c Cards) WithRank(r *Rank, max int) Cards {
+func (c Cards) WithRank(r rank.Rank, max int) Cards {
 	ret := lo.Filter(c, func(crd *Card, _ int) bool {
 		return crd.Rank == r
 	})
@@ -31,7 +33,7 @@ func (c Cards) WithRank(r *Rank, max int) Cards {
 	return ret[:max]
 }
 
-func (c Cards) WithSuit(s *Suit, max int) Cards {
+func (c Cards) WithSuit(s suit.Suit, max int) Cards {
 	ret := lo.Filter(c, func(crd *Card, _ int) bool {
 		return crd.Suit == s
 	})
@@ -45,9 +47,9 @@ func (c Cards) Sorted() Cards {
 	ret := slices.Clone(c)
 	slices.SortFunc(ret, func(l *Card, r *Card) bool {
 		if l.Rank == r.Rank {
-			return l.Suit.Index < r.Suit.Index
+			return uint8(l.Suit) < uint8(r.Suit)
 		}
-		return l.Rank.Index < r.Rank.Index
+		return uint8(l.Rank) < uint8(r.Rank)
 	})
 	return ret
 }
@@ -59,20 +61,20 @@ func (c Cards) Last() *Card {
 	return c[len(c)-1]
 }
 
-func (c Cards) MaxRank() *Rank {
-	var ret *Rank
+func (c Cards) MaxRank() rank.Rank {
+	var ret rank.Rank
 	lo.ForEach(c, func(crd *Card, _ int) {
-		if ret == nil || crd.Rank.Index > ret.Index {
+		if uint8(crd.Rank) > uint8(ret) {
 			ret = crd.Rank
 		}
 	})
 	return ret
 }
 
-func (c Cards) MaxSuit() *Suit {
-	var ret *Suit
+func (c Cards) MaxSuit() suit.Suit {
+	var ret suit.Suit
 	lo.ForEach(c, func(crd *Card, _ int) {
-		if ret == nil || crd.Suit.Index > ret.Index {
+		if uint8(crd.Suit) > uint8(ret) {
 			ret = crd.Suit
 		}
 	})
@@ -105,12 +107,12 @@ func (c Cards) EqualsSimple(x Cards) bool {
 	return true
 }
 
-func RandomCards(amount int, suits Suits, offset int) Cards {
+func RandomCards(amount int, suits suit.Suits, offset int) Cards {
 	return lo.Map(lo.Range(amount), func(i int, _ int) *Card {
 		return RandomCard(i+offset, suits)
 	})
 }
 
-func RandomCard(id int, suits Suits) *Card {
-	return &Card{ID: id, Rank: RanksAll.Random(), Suit: suits.Random(), FaceUp: util.RandomBool()}
+func RandomCard(id int, suits suit.Suits) *Card {
+	return &Card{ID: id, Rank: rank.RanksAll.Random(), Suit: suits.Random(), FaceUp: util.RandomBool()}
 }

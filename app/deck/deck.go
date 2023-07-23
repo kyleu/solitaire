@@ -1,6 +1,8 @@
 package deck
 
 import (
+	"github.com/kyleu/solitaire/app/rank"
+	"github.com/kyleu/solitaire/app/suit"
 	"github.com/samber/lo"
 
 	"github.com/kyleu/solitaire/app/card"
@@ -22,17 +24,17 @@ func (d *Deck) Empty() bool {
 	return len(d.Cards) == 0
 }
 
-func FreshDeck(numLoops int, ranks card.Ranks, suits card.Suits, faceUp bool, idOffset int) *Deck {
+func FreshDeck(numLoops int, ranks rank.Ranks, suits suit.Suits, faceUp bool, idOffset int) *Deck {
 	if len(ranks) == 0 {
-		ranks = card.RanksAll
+		ranks = rank.RanksAll
 	}
 	if len(suits) == 0 {
-		suits = card.SuitsCommon
+		suits = suit.SuitsCommon
 	}
 	id := 0
 	cards := lo.FlatMap(lo.Range(numLoops), func(_ int, loopIdx int) []*card.Card {
-		return lo.FlatMap(suits, func(s *card.Suit, suitIdx int) []*card.Card {
-			return lo.Map(ranks, func(r *card.Rank, rankIdx int) *card.Card {
+		return lo.FlatMap(suits, func(s suit.Suit, suitIdx int) []*card.Card {
+			return lo.Map(ranks, func(r rank.Rank, rankIdx int) *card.Card {
 				id++
 				return card.NewCard(idOffset+id, r, s, faceUp)
 			})

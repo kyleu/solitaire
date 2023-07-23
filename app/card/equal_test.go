@@ -3,6 +3,8 @@
 package card_test
 
 import (
+	"github.com/kyleu/solitaire/app/rank"
+	"github.com/kyleu/solitaire/app/suit"
 	"testing"
 
 	"github.com/kyleu/solitaire/app/card"
@@ -17,20 +19,20 @@ type cardEqualTest struct {
 }
 
 func commonCard(faceUp bool) *card.Card {
-	return card.NewCard(0, card.RankAce, card.SuitHearts, faceUp)
+	return card.NewCard(0, rank.RankAce, suit.Hearts, faceUp)
 }
 
 var cardEqualTests = []*cardEqualTest{
 	{k: "same", l: commonCard(true), r: commonCard(true), succeeds: true},
-	{k: "diffId", l: commonCard(true), r: card.NewCard(1, card.RankAce, card.SuitHearts, true)},
-	{k: "diffRank", l: commonCard(true), r: card.NewCard(0, card.RankKing, card.SuitHearts, true)},
-	{k: "diffSuit", l: commonCard(true), r: card.NewCard(0, card.RankAce, card.SuitSpades, true)},
-	{k: "diffFaceUp", l: commonCard(true), r: card.NewCard(0, card.RankAce, card.SuitHearts, false)},
+	{k: "diffId", l: commonCard(true), r: card.NewCard(1, rank.RankAce, suit.Hearts, true)},
+	{k: "diffRank", l: commonCard(true), r: card.NewCard(0, rank.RankKing, suit.Hearts, true)},
+	{k: "diffSuit", l: commonCard(true), r: card.NewCard(0, rank.RankAce, suit.Spades, true)},
+	{k: "diffFaceUp", l: commonCard(true), r: card.NewCard(0, rank.RankAce, suit.Hearts, false)},
 
 	{k: "sameSimple", l: commonCard(true), r: commonCard(true), succeeds: true, simple: true},
 	{k: "diffFaceUpSimple", l: commonCard(true), r: commonCard(false), succeeds: true, simple: true},
-	{k: "diffRank", l: commonCard(true), r: card.NewCard(0, card.RankKing, card.SuitHearts, true), simple: true},
-	{k: "diffSuit", l: commonCard(true), r: card.NewCard(0, card.RankAce, card.SuitSpades, true), simple: true},
+	{k: "diffRank", l: commonCard(true), r: card.NewCard(0, rank.RankKing, suit.Hearts, true), simple: true},
+	{k: "diffSuit", l: commonCard(true), r: card.NewCard(0, rank.RankAce, suit.Spades, true), simple: true},
 }
 
 func TestEqual(t *testing.T) {

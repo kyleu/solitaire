@@ -2,6 +2,8 @@ package card
 
 import (
 	"fmt"
+	"github.com/kyleu/solitaire/app/rank"
+	"github.com/kyleu/solitaire/app/suit"
 	"strconv"
 	"strings"
 
@@ -11,17 +13,17 @@ import (
 )
 
 type Card struct {
-	ID     int   `json:"id"`
-	Rank   *Rank `json:"r"`
-	Suit   *Suit `json:"s"`
-	FaceUp bool  `json:"u,omitempty"`
+	ID     int       `json:"id"`
+	Rank   rank.Rank `json:"r"`
+	Suit   suit.Suit `json:"s"`
+	FaceUp bool      `json:"u,omitempty"`
 }
 
-func NewCardOld(r *Rank, s *Suit) *Card {
+func NewCardOld(r rank.Rank, s suit.Suit) *Card {
 	return &Card{Rank: r, Suit: s}
 }
 
-func NewCard(id int, r *Rank, s *Suit, u bool) *Card {
+func NewCard(id int, r rank.Rank, s suit.Suit, u bool) *Card {
 	return &Card{ID: id, Rank: r, Suit: s, FaceUp: u}
 }
 
@@ -45,15 +47,15 @@ func FromCardString(str string) (*Card, error) {
 		return nil, errors.Errorf("Invalid card [%s]", str)
 	}
 
-	r, ok := ranksByKey[str[0:1]]
-	if !ok {
-		return nil, errors.Errorf("Invalid card rank [%s]", str[0:1])
+	r, err := rank.Parse(str[0:1])
+	if err != nil {
+		return nil, errors.Wrapf(err, "Invalid card rank [%s]", str[0:1])
 	}
 	ret.Rank = r
 
-	s, ok := suitsByKey[str[1:2]]
-	if !ok {
-		return nil, errors.Errorf("Invalid card suit [%s]", str[1:2])
+	s, err := suit.Parse(str[1:2])
+	if err != nil {
+		return nil, errors.Wrapf(err, "Invalid card suit [%s]", str[1:2])
 	}
 	ret.Suit = s
 
@@ -77,7 +79,7 @@ func (c *Card) String() string {
 	if c.ID != 0 {
 		ret += fmt.Sprintf("%d:", c.ID)
 	}
-	ret += fmt.Sprintf("%s%s", c.Rank.Key, c.Suit.Key)
+	ret += fmt.Sprintf("%s%s", c.Rank.Key(), c.Suit.Key())
 	if c.FaceUp {
 		ret += "+"
 	}
