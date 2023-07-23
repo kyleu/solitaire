@@ -18,7 +18,7 @@ brews:
       email: "solitaire@kyleu.com"
     folder: Formula
     homepage: "https://github.com/kyleu/solitaire"
-    description: ""
+    description: "A solitaire game... details soon"
     license: "MIT"
     skip_upload: "false"
     install: "bin.install \"solitaire\""
@@ -61,7 +61,7 @@ nfpms:
     vendor: "Kyle U"
     homepage: "https://github.com/kyleu/solitaire}"
     maintainer: "Kyle U <solitaire@kyleu.com>"
-    description: ""
+    description: "A solitaire game... details soon"
     license: "MIT"
     formats:
       - apk
@@ -99,7 +99,7 @@ snapcrafts:
   -
     publish: false
     summary: "A solitaire game... details soon"
-    description: ""
+    description: "A solitaire game... details soon"
     grade: stable
     confinement: strict
     license: "MIT"

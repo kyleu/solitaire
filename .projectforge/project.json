@@ -34,6 +34,7 @@
     "homepage": "https://github.com/kyleu/solitaire",
     "sourcecode": "https://github.com/kyleu/solitaire",
     "summary": "A solitaire game... details soon",
+    "description": "A solitaire game... details soon",
     "bundle": "dev.kyleu.solitaire",
     "signingIdentity": "Developer ID Application: Kyle Unverferth (C6S478FYLD)",
     "notarizeEmail": "kyle@kyleu.com",
