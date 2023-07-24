@@ -3,9 +3,10 @@
 package card_test
 
 import (
+	"testing"
+
 	"github.com/kyleu/solitaire/app/game/rank"
 	"github.com/kyleu/solitaire/app/game/suit"
-	"testing"
 
 	"github.com/kyleu/solitaire/app/game/card"
 )

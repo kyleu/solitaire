@@ -1,8 +1,9 @@
 package suit
 
 import (
-	"github.com/pkg/errors"
 	"strings"
+
+	"github.com/pkg/errors"
 
 	"github.com/kyleu/solitaire/app/util"
 )

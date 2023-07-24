@@ -1,9 +1,10 @@
 package rank
 
 import (
+	"strings"
+
 	"github.com/pkg/errors"
 	"golang.org/x/exp/slices"
-	"strings"
 
 	"github.com/kyleu/solitaire/app/util"
 )
