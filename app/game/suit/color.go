@@ -1,6 +1,7 @@
 package suit
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -44,6 +45,25 @@ func (c Color) Key() string {
 		return "?"
 	default:
 		return "?"
+	}
+}
+
+func (c Color) Name() string {
+	switch c {
+	case ColorRed:
+		return "Red"
+	case ColorBlack:
+		return "Black"
+	case ColorGreen:
+		return "Green"
+	case ColorBlue:
+		return "Blue"
+	case ColorColorless:
+		return "Colorless"
+	case ColorUnknown:
+		return util.KeyUnknown
+	default:
+		return fmt.Sprintf("Unknown: %d", c)
 	}
 }
 

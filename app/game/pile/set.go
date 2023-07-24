@@ -4,21 +4,17 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/kyleu/solitaire/app/game/card"
+	"github.com/kyleu/solitaire/app/util"
 )
 
-type Position struct {
-	X float64 `json:"x"`
-	Y float64 `json:"y"`
-}
-
 type Set struct {
-	Behavior   any       `json:"behavior"`
-	Piles      Piles     `json:"piles"`
-	Hidden     bool      `json:"hidden,omitempty"`
-	Position   *Position `json:"position,omitempty"`
-	Rows       float64   `json:"rows,omitempty"`
-	Dimensions *Position `json:"dimensions,omitempty"`
-	Divisor    float64   `json:"divisor,omitempty"`
+	Behavior   any            `json:"behavior"`
+	Piles      Piles          `json:"piles"`
+	Hidden     bool           `json:"hidden,omitempty"`
+	Position   *util.Position `json:"position,omitempty"`
+	Rows       float64        `json:"rows,omitempty"`
+	Dimensions *util.Position `json:"dimensions,omitempty"`
+	Divisor    float64        `json:"divisor,omitempty"`
 }
 
 func (s *Set) Visible() bool {

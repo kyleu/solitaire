@@ -62,8 +62,8 @@ func straightResult(cards card.Cards, straight rank.Ranks) (card.Cards, string) 
 	crds := lo.Map(straight, func(r rank.Rank, _ int) *card.Card {
 		return cards.WithRank(r, 1)[0]
 	})
-	str := strings.Join(lo.Map(straight, func(item rank.Rank, _ int) string {
-		return item.Key()
+	str := strings.Join(lo.Map(straight, func(r rank.Rank, _ int) string {
+		return r.Key()
 	}), ", ")
 	return crds, str
 }

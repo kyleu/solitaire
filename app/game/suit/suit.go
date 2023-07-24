@@ -73,7 +73,7 @@ func (s Suit) Name() string {
 	case Suitless:
 		return "Suitless"
 	case Unknown:
-		return "Unknown"
+		return util.KeyUnknown
 	default:
 		return fmt.Sprintf("Unknown[%d]", s)
 	}

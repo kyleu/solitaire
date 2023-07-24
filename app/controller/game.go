@@ -45,7 +45,7 @@ func GameTestHTML(rc *fasthttp.RequestCtx) {
 		g := game.New(rules.Example)
 		ps.Data = g
 		ps.Title = "HTML Test"
-		return Render(rc, as, &vgame.HTML{}, ps, "game", "html")
+		return Render(rc, as, &vgame.HTML{Game: g}, ps, "game", "html")
 	})
 }
 
@@ -54,6 +54,6 @@ func GameTestWASM(rc *fasthttp.RequestCtx) {
 		g := game.New(rules.Example)
 		ps.Data = g
 		ps.Title = "WASM Test"
-		return Render(rc, as, &vgame.WASM{}, ps, "game", "wasm")
+		return Render(rc, as, &vgame.WASM{Game: g}, ps, "game", "wasm")
 	})
 }

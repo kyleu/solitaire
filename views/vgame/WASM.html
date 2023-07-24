@@ -1,6 +1,7 @@
 {% import (
   "github.com/kyleu/solitaire/app"
   "github.com/kyleu/solitaire/app/controller/cutil"
+  "github.com/kyleu/solitaire/app/game"
   "github.com/kyleu/solitaire/app/util"
   "github.com/kyleu/solitaire/views/components"
   "github.com/kyleu/solitaire/views/layout"
@@ -9,6 +10,7 @@
 
 {% code type WASM struct {
   layout.Basic
+  Game *game.Game
 } %}
 
 {% func (p *WASM) Body(as *app.State, ps *cutil.PageState) %}

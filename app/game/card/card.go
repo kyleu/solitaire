@@ -110,3 +110,7 @@ func (c *Card) ReplaceFrom(x *Card) {
 	c.Suit = x.Suit
 	c.FaceUp = x.FaceUp
 }
+
+func (c *Card) Unicode() string {
+	return UnicodeCards[c.Rank.Key()+c.Suit.Key()]
+}
