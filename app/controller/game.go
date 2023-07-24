@@ -32,7 +32,7 @@ func GameTestJSON(rc *fasthttp.RequestCtx) {
 	Act("game.test.json", rc, func(as *app.State, ps *cutil.PageState) (string, error) {
 		g := game.New(rules.Example)
 		hand := pile.Pile{ID: "test", Options: &pile.Options{}, Cards: card.RandomCards(5, suit.SuitsCommon, 1)}
-		result := poker.PokerCheck(hand.Cards)
+		result := poker.Check(hand.Cards)
 		ret := &TestJSONResponse{Game: g, PokerHand: hand, PokerResult: result}
 		ps.Data = ret
 		ps.Title = "JSON Test"
@@ -42,7 +42,7 @@ func GameTestJSON(rc *fasthttp.RequestCtx) {
 
 func GameTestHTML(rc *fasthttp.RequestCtx) {
 	Act("game.test.html", rc, func(as *app.State, ps *cutil.PageState) (string, error) {
-		g := "TODO"
+		g := game.New(rules.Example)
 		ps.Data = g
 		ps.Title = "HTML Test"
 		return Render(rc, as, &vgame.HTML{}, ps, "game", "html")
@@ -51,7 +51,7 @@ func GameTestHTML(rc *fasthttp.RequestCtx) {
 
 func GameTestWASM(rc *fasthttp.RequestCtx) {
 	Act("game.test.wasm", rc, func(as *app.State, ps *cutil.PageState) (string, error) {
-		g := "TODO"
+		g := game.New(rules.Example)
 		ps.Data = g
 		ps.Title = "WASM Test"
 		return Render(rc, as, &vgame.WASM{}, ps, "game", "wasm")

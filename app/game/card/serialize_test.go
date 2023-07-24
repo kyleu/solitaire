@@ -18,11 +18,11 @@ type cardSerializeTest struct {
 }
 
 var cardSerializeTests = []*cardSerializeTest{
-	{k: "AH", c: card.NewCard(0, rank.RankAce, suit.Hearts, false)},
-	{k: "AH+", c: card.NewCard(0, rank.RankAce, suit.Hearts, true)},
-	{k: "1:AH", c: card.NewCard(1, rank.RankAce, suit.Hearts, false)},
-	{k: "1:AH+", c: card.NewCard(1, rank.RankAce, suit.Hearts, true)},
-	{k: "KS", c: card.NewCard(0, rank.RankKing, suit.Spades, false)},
+	{k: "AH", c: card.NewCard(0, rank.Ace, suit.Hearts, false)},
+	{k: "AH+", c: card.NewCard(0, rank.Ace, suit.Hearts, true)},
+	{k: "1:AH", c: card.NewCard(1, rank.Ace, suit.Hearts, false)},
+	{k: "1:AH+", c: card.NewCard(1, rank.Ace, suit.Hearts, true)},
+	{k: "KS", c: card.NewCard(0, rank.King, suit.Spades, false)},
 }
 
 func TestSerialize(t *testing.T) {

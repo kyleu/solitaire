@@ -11,51 +11,53 @@ import (
 type Rank uint8
 
 const (
-	RankTwo Rank = iota + 1
-	RankThree
-	RankFour
-	RankFive
-	RankSix
-	RankSeven
-	RankEight
-	RankNine
-	RankTen
-	RankJack
-	RankQueen
-	RankKing
-	RankAce
-	RankUnknown
+	Two Rank = iota + 1
+	Three
+	Four
+	Five
+	Six
+	Seven
+	Eight
+	Nine
+	Ten
+	Jack
+	Queen
+	King
+	Ace
+	Unknown
+
+	keyUnknown = "Unknown"
 )
 
 func (r Rank) Key() string {
 	switch r {
-	case RankTwo:
+	case Two:
 		return "2"
-	case RankThree:
+	case Three:
 		return "3"
-	case RankFour:
+	case Four:
 		return "4"
-	case RankFive:
+	case Five:
 		return "5"
-	case RankSix:
+	case Six:
 		return "6"
-	case RankSeven:
+	case Seven:
 		return "7"
-	case RankEight:
+	case Eight:
 		return "8"
-	case RankNine:
+	case Nine:
 		return "9"
-	case RankTen:
+	case Ten:
 		return "X"
-	case RankJack:
+	case Jack:
 		return "J"
-	case RankQueen:
+	case Queen:
 		return "Q"
-	case RankKing:
+	case King:
 		return "K"
-	case RankAce:
+	case Ace:
 		return "A"
-	case RankUnknown:
+	case Unknown:
 		return "?"
 	default:
 		return "?"
@@ -64,34 +66,34 @@ func (r Rank) Key() string {
 
 func (r Rank) Name() string {
 	switch r {
-	case RankTwo:
+	case Two:
 		return "Two"
-	case RankThree:
+	case Three:
 		return "Three"
-	case RankFour:
+	case Four:
 		return "Four"
-	case RankFive:
+	case Five:
 		return "Five"
-	case RankSix:
+	case Six:
 		return "Six"
-	case RankSeven:
+	case Seven:
 		return "Seven"
-	case RankEight:
+	case Eight:
 		return "Eight"
-	case RankNine:
+	case Nine:
 		return "Nine"
-	case RankTen:
+	case Ten:
 		return "Ten"
-	case RankJack:
+	case Jack:
 		return "Jack"
-	case RankQueen:
+	case Queen:
 		return "Queen"
-	case RankKing:
+	case King:
 		return "King"
-	case RankAce:
+	case Ace:
 		return "Ace"
-	case RankUnknown:
-		return "Unknown"
+	case Unknown:
+		return keyUnknown
 	default:
 		return fmt.Sprintf("Unknown[%d]", r)
 	}
@@ -99,34 +101,34 @@ func (r Rank) Name() string {
 
 func (r Rank) Plural() string {
 	switch r {
-	case RankTwo:
+	case Two:
 		return "Twos"
-	case RankThree:
+	case Three:
 		return "Threes"
-	case RankFour:
+	case Four:
 		return "Fours"
-	case RankFive:
+	case Five:
 		return "Fives"
-	case RankSix:
+	case Six:
 		return "Sixes"
-	case RankSeven:
+	case Seven:
 		return "Sevens"
-	case RankEight:
+	case Eight:
 		return "Eights"
-	case RankNine:
+	case Nine:
 		return "Nines"
-	case RankTen:
+	case Ten:
 		return "Tens"
-	case RankJack:
+	case Jack:
 		return "Jacks"
-	case RankQueen:
+	case Queen:
 		return "Queens"
-	case RankKing:
+	case King:
 		return "Kings"
-	case RankAce:
+	case Ace:
 		return "Aces"
-	case RankUnknown:
-		return "Unknown"
+	case Unknown:
+		return keyUnknown
 	default:
 		return fmt.Sprintf("Unknown[%d]", r)
 	}
@@ -143,5 +145,5 @@ func (r *Rank) UnmarshalJSON(data []byte) error {
 		return errors.Wrapf(err, "Invalid suit key [%s]", string(data))
 	}
 	*r, err = Parse(key)
-	return nil
+	return err
 }

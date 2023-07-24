@@ -3,7 +3,6 @@ package deck
 import (
 	"github.com/samber/lo"
 
-
 	"github.com/kyleu/solitaire/app/game/card"
 	"github.com/kyleu/solitaire/app/game/rank"
 	"github.com/kyleu/solitaire/app/game/suit"

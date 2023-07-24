@@ -8,7 +8,7 @@ import (
 	"github.com/kyleu/solitaire/app/game/rank"
 )
 
-func PokerCheck(cards card.Cards) *PokerResult {
+func Check(cards card.Cards) *Result {
 	ranks := cards.Ranks().Sorted()
 	ranksCount := lo.CountValues(ranks)
 
@@ -20,7 +20,7 @@ func PokerCheck(cards card.Cards) *PokerResult {
 		for _, s := range suits {
 			if straightFlush := longestRun(cards.WithSuit(s, 0).Ranks()); len(straightFlush) >= 5 {
 				crds, str := straightResult(cards, straightFlush)
-				if uint8(straightFlush.Last()) == uint8(rank.RankAce) {
+				if uint8(straightFlush.Last()) == uint8(rank.Ace) {
 					return newResult(crds, HandTypeRoyalFlush, 0, "Royal Flush ("+str+" of "+s.Name()+")")
 				}
 				return newResult(crds, HandTypeStraightFlush, int(crds.MaxRank()), "Straight Flush ("+str+" of "+s.Name()+")")

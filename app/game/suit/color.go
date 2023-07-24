@@ -58,7 +58,7 @@ func (c *Color) UnmarshalJSON(data []byte) error {
 		return errors.Wrapf(err, "Invalid suit key [%s]", string(data))
 	}
 	*c, err = ParseColor(key)
-	return nil
+	return err
 }
 
 func ParseColor(key string) (Color, error) {

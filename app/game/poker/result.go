@@ -20,13 +20,13 @@ var (
 	HandTypeRoyalFlush    = &HandType{Name: "Royal flush", Score: 10}
 )
 
-type PokerResult struct {
+type Result struct {
 	Cards   card.Cards `json:"cards"`
 	Score   int        `json:"score"`
 	Result  *HandType  `json:"-"`
 	Message string     `json:"message"`
 }
 
-func newResult(cards card.Cards, res *HandType, addScore int, msg string) *PokerResult {
-	return &PokerResult{Cards: cards, Score: (res.Score * 1000) + addScore, Result: res, Message: msg}
+func newResult(cards card.Cards, res *HandType, addScore int, msg string) *Result {
+	return &Result{Cards: cards, Score: (res.Score * 1000) + addScore, Result: res, Message: msg}
 }

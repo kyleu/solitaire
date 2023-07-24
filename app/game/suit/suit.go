@@ -144,5 +144,5 @@ func (s *Suit) UnmarshalJSON(data []byte) error {
 		return errors.Wrapf(err, "Invalid suit key [%s]", string(data))
 	}
 	*s, err = Parse(key)
-	return nil
+	return err
 }

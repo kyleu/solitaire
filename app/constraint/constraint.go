@@ -47,10 +47,10 @@ func AllOf(id string, constraints ...*Constraint) *Constraint {
 	}, nil)
 }
 
-// TODO
+// FiniteTimes - implement soon.
 func FiniteTimes(id string, count int) *Constraint {
 	return newConstraint(id, func(_ *pile.Pile, _ pile.Pile, _ card.Cards, _ any) bool {
-		_ = count // TODO
+		_ = count
 		return true
 	}, nil)
 }

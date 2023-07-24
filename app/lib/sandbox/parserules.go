@@ -26,26 +26,26 @@ func onParseRules(_ context.Context, _ *app.State, logger util.Logger) (any, err
 			name := strings.TrimSuffix(filename, ".scala")
 			return &rules.Rules{Name: name, Error: err.Error()}
 		}
-		return parseLines(util.StringSplitAndTrim(string(b), "\n"))
+		return parseLines(util.StringSplitAndTrim(string(b), "\n"), logger)
 	})
 	return ret, nil
 }
 
-func parseLines(lines []string) *rules.Rules {
+func parseLines(lines []string, logger util.Logger) *rules.Rules {
 	ret := &rules.Rules{}
 	mode := ""
 	section := ""
 	for _, line := range lines {
 		if mode == "" {
-			mode, section = parseNormalLine(line, ret, mode, section)
+			mode, section = parseNormalLine(line, ret, mode, section, logger)
 		} else {
-			println("???", line)
+			logger.Infof("???: %s", line)
 		}
 	}
 	return ret
 }
 
-func parseNormalLine(line string, rl *rules.Rules, mode string, section string) (string, string) {
+func parseNormalLine(line string, rl *rules.Rules, mode string, section string, logger util.Logger) (string, string) {
 	if strings.Contains(line, "=") {
 		k, v := util.StringSplit(line, '=', true)
 		k, v = strings.TrimSpace(k), strings.TrimSuffix(strings.TrimSpace(v), ",")
@@ -67,7 +67,7 @@ func parseNormalLine(line string, rl *rules.Rules, mode string, section string) 
 		case "like":
 			rl.Like = v
 		default:
-			println(k, "/", v)
+			logger.Info(k, "/", v)
 		}
 	}
 	return mode, section

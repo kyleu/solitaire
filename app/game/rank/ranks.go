@@ -25,32 +25,32 @@ func (r Ranks) Random() Rank {
 
 func (r Ranks) Last() Rank {
 	if len(r) == 0 {
-		return RankUnknown
+		return Unknown
 	}
 	return r[len(r)-1]
 }
 
 var (
 	rankMap = map[string]Rank{
-		"2": RankTwo,
-		"3": RankThree,
-		"4": RankFour,
-		"5": RankFive,
-		"6": RankSix,
-		"7": RankSeven,
-		"8": RankEight,
-		"9": RankNine,
-		"x": RankTen,
-		"j": RankJack,
-		"q": RankQueen,
-		"k": RankKing,
-		"a": RankAce,
-		"?": RankUnknown,
+		"2": Two,
+		"3": Three,
+		"4": Four,
+		"5": Five,
+		"6": Six,
+		"7": Seven,
+		"8": Eight,
+		"9": Nine,
+		"x": Ten,
+		"j": Jack,
+		"q": Queen,
+		"k": King,
+		"a": Ace,
+		"?": Unknown,
 	}
 
 	RanksAll = Ranks{
-		RankTwo, RankThree, RankFour, RankFive, RankSix, RankSeven, RankEight,
-		RankNine, RankTen, RankJack, RankQueen, RankKing, RankAce,
+		Two, Three, Four, Five, Six, Seven, Eight,
+		Nine, Ten, Jack, Queen, King, Ace,
 	}
 )
 
@@ -58,7 +58,7 @@ func Parse(key string) (Rank, error) {
 	key = strings.TrimSpace(strings.ToLower(key))
 	ret, ok := rankMap[key]
 	if !ok {
-		return RankUnknown, errors.Errorf("invalid suit [%s]", key)
+		return Unknown, errors.Errorf("invalid suit [%s]", key)
 	}
 	return ret, nil
 }

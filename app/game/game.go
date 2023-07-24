@@ -22,7 +22,7 @@ type Game struct {
 	StockCounter int `json:"stockCounter,omitempty"`
 }
 
-func New(rules *rules.Rules) *Game {
+func New(r *rules.Rules) *Game {
 	d := deck.FreshDeck(1, nil, nil, false, 0)
-	return &Game{ID: util.UUID(), Rules: rules, Deck: d, PileSets: nil}
+	return &Game{ID: util.UUID(), Rules: r, Deck: d, PileSets: nil}
 }
