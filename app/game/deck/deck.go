@@ -1,11 +1,11 @@
 package deck
 
 import (
-	"github.com/kyleu/solitaire/app/rank"
-	"github.com/kyleu/solitaire/app/suit"
+	"github.com/kyleu/solitaire/app/game/rank"
+	"github.com/kyleu/solitaire/app/game/suit"
 	"github.com/samber/lo"
 
-	"github.com/kyleu/solitaire/app/card"
+	"github.com/kyleu/solitaire/app/game/card"
 )
 
 type Deck struct {

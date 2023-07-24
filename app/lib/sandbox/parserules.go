@@ -8,41 +8,31 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/kyleu/solitaire/app"
+	"github.com/kyleu/solitaire/app/game/rules"
 	"github.com/kyleu/solitaire/app/lib/filesystem"
 	"github.com/kyleu/solitaire/app/util"
 )
 
 var parseRules = &Sandbox{Key: "parseRules", Title: "Parse Rules", Icon: "heart", Run: onParseRules}
 
-type Rules struct {
-	Key       string            `json:"key"`
-	Completed bool              `json:"completed,omitempty"`
-	Name      string            `json:"name"`
-	AKA       map[string]string `json:"aka,omitempty"`
-	Links     map[string]string `json:"links,omitempty"`
-	Layout    string            `json:"layout"`
-	Like      string            `json:"like,omitempty"`
-	Error     string            `json:"error,omitempty"`
-}
-
 func onParseRules(_ context.Context, _ *app.State, logger util.Logger) (any, error) {
 	fs := filesystem.NewFileSystem("../solitaire.gg/shared/src/main/scala/models/rules/impl")
 	files := lo.Map(fs.ListFiles(".", nil, logger), func(e os.DirEntry, _ int) string {
 		return e.Name()
 	})
-	ret := lo.Map(files, func(filename string, _ int) *Rules {
+	ret := lo.Map(files, func(filename string, _ int) *rules.Rules {
 		b, err := fs.ReadFile(filename)
 		if err != nil {
 			name := strings.TrimSuffix(filename, ".scala")
-			return &Rules{Name: name, Error: err.Error()}
+			return &rules.Rules{Name: name, Error: err.Error()}
 		}
 		return parseLines(util.StringSplitAndTrim(string(b), "\n"))
 	})
 	return ret, nil
 }
 
-func parseLines(lines []string) *Rules {
-	ret := &Rules{}
+func parseLines(lines []string) *rules.Rules {
+	ret := &rules.Rules{}
 	mode := ""
 	section := ""
 	for _, line := range lines {
@@ -55,7 +45,7 @@ func parseLines(lines []string) *Rules {
 	return ret
 }
 
-func parseNormalLine(line string, rl *Rules, mode string, section string) (string, string) {
+func parseNormalLine(line string, rl *rules.Rules, mode string, section string) (string, string) {
 	if strings.Contains(line, "=") {
 		k, v := util.StringSplit(line, '=', true)
 		k, v = strings.TrimSpace(k), strings.TrimSuffix(strings.TrimSpace(v), ",")

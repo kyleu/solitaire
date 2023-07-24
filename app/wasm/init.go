@@ -3,16 +3,16 @@
 package main
 
 import (
-	"github.com/kyleu/solitaire/app/card"
-	"github.com/kyleu/solitaire/app/pile"
-	"github.com/kyleu/solitaire/app/rules"
-	"github.com/kyleu/solitaire/app/suit"
+	"github.com/kyleu/solitaire/app/game/card"
+	"github.com/kyleu/solitaire/app/game/pile"
+	"github.com/kyleu/solitaire/app/game/poker"
+	"github.com/kyleu/solitaire/app/game/suit"
 	"github.com/kyleu/solitaire/app/util"
 )
 
 func initWASM(l util.Logger) {
 	randoms := pile.Pile{ID: "test", Options: &pile.Options{}, Cards: card.RandomCards(10, suit.SuitsCommon, 1)}
 	Audit("Hand", util.ToJSON(randoms))
-	outcome := rules.CheckPoker(randoms.Cards)
+	outcome := poker.PokerCheck(randoms.Cards)
 	Audit("Outcome", util.ToJSON(outcome))
 }

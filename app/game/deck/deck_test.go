@@ -3,7 +3,7 @@ package deck_test
 import (
 	"testing"
 
-	"github.com/kyleu/solitaire/app/deck"
+	"github.com/kyleu/solitaire/app/game/deck"
 )
 
 func getFreshDeck(faceUp bool) *deck.Deck {

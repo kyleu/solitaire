@@ -37,35 +37,36 @@ func (p *Index) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.P
     <h3>Game Tests</h3>
     <ul class="mt">
       <li><a href="/game/test/html">HTML</a></li>
+      <li><a href="/game/test/json">JSON</a></li>
       <li><a href="/game/test/wasm">WASM</a></li>
     </ul>
   </div>
 `)
-//line views/vgame/Index.html:19
+//line views/vgame/Index.html:20
 }
 
-//line views/vgame/Index.html:19
+//line views/vgame/Index.html:20
 func (p *Index) WriteBody(qq422016 qtio422016.Writer, as *app.State, ps *cutil.PageState) {
-//line views/vgame/Index.html:19
+//line views/vgame/Index.html:20
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line views/vgame/Index.html:19
+//line views/vgame/Index.html:20
 	p.StreamBody(qw422016, as, ps)
-//line views/vgame/Index.html:19
+//line views/vgame/Index.html:20
 	qt422016.ReleaseWriter(qw422016)
-//line views/vgame/Index.html:19
+//line views/vgame/Index.html:20
 }
 
-//line views/vgame/Index.html:19
+//line views/vgame/Index.html:20
 func (p *Index) Body(as *app.State, ps *cutil.PageState) string {
-//line views/vgame/Index.html:19
+//line views/vgame/Index.html:20
 	qb422016 := qt422016.AcquireByteBuffer()
-//line views/vgame/Index.html:19
+//line views/vgame/Index.html:20
 	p.WriteBody(qb422016, as, ps)
-//line views/vgame/Index.html:19
+//line views/vgame/Index.html:20
 	qs422016 := string(qb422016.B)
-//line views/vgame/Index.html:19
+//line views/vgame/Index.html:20
 	qt422016.ReleaseByteBuffer(qb422016)
-//line views/vgame/Index.html:19
+//line views/vgame/Index.html:20
 	return qs422016
-//line views/vgame/Index.html:19
+//line views/vgame/Index.html:20
 }

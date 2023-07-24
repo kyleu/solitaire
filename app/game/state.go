@@ -1,4 +1,3 @@
 package game
 
-type State struct {
-}
+type State struct{}

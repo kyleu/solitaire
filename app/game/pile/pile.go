@@ -1,6 +1,6 @@
 package pile
 
-import "github.com/kyleu/solitaire/app/card"
+import "github.com/kyleu/solitaire/app/game/card"
 
 type Pile struct {
 	ID      string     `json:"id"`

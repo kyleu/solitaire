@@ -7,8 +7,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/kyleu/solitaire/app/rank"
-	"github.com/kyleu/solitaire/app/suit"
+	"github.com/kyleu/solitaire/app/game/rank"
+	"github.com/kyleu/solitaire/app/game/suit"
 	"github.com/kyleu/solitaire/app/util"
 )
 

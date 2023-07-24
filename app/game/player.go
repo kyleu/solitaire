@@ -7,3 +7,5 @@ type Player struct {
 	Name           string    `json:"n,omitempty"`
 	AutoFlipOption bool      `json:"af,omitempty"`
 }
+
+type Players []*Player

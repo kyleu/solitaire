@@ -1,11 +1,12 @@
 package constraint
 
 import (
-	"github.com/kyleu/solitaire/app/card"
-	"github.com/kyleu/solitaire/app/pile"
-	"github.com/kyleu/solitaire/app/rank"
-	"github.com/kyleu/solitaire/app/util"
 	"github.com/samber/lo"
+
+	"github.com/kyleu/solitaire/app/game/card"
+	"github.com/kyleu/solitaire/app/game/pile"
+	"github.com/kyleu/solitaire/app/game/rank"
+	"github.com/kyleu/solitaire/app/util"
 )
 
 type Fn func(src *pile.Pile, tgt pile.Pile, crds card.Cards, state any) bool
