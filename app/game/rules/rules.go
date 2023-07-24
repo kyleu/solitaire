@@ -19,9 +19,9 @@ type Rules struct {
 	Links   Links             `json:"links,omitempty"`
 
 	MaxPlayers        int `json:"maxPlayers,omitempty"`
-	VictoryCondition  any `json:"victoryCondition"`
-	CardRemovalMethod any `json:"cardRemovalMethod"`
-	DeckOptions       any `json:"deckOptions"`
+	VictoryCondition  any `json:"victoryCondition,omitempty"`
+	CardRemovalMethod any `json:"cardRemovalMethod,omitempty"`
+	DeckOptions       any `json:"deckOptions,omitempty"`
 
 	Stock       any `json:"stock,omitempty"`
 	Waste       any `json:"waste,omitempty"`
