@@ -2,6 +2,7 @@ package sandbox
 
 import (
 	"context"
+	"github.com/pkg/errors"
 	"os"
 	"strings"
 
@@ -26,49 +27,90 @@ func onParseRules(_ context.Context, _ *app.State, logger util.Logger) (any, err
 			name := strings.TrimSuffix(filename, ".scala")
 			return &rules.Rules{Name: name, Error: err.Error()}
 		}
-		return parseLines(util.StringSplitAndTrim(string(b), "\n"), logger)
+		content := string(b)
+		return parseFile(content, logger)
+		// return parseLines(util.StringSplitAndTrim(content, "\n"), logger)
 	})
 	return ret, nil
 }
 
-func parseLines(lines []string, logger util.Logger) *rules.Rules {
+func parseFile(content string, logger util.Logger) *rules.Rules {
+	sections := splitSections(content)
 	ret := &rules.Rules{}
-	mode := ""
-	section := ""
-	for _, line := range lines {
-		if mode == "" {
-			mode, section = parseNormalLine(line, ret, mode, section, logger)
-		} else {
-			logger.Infof("???: %s", line)
+	for _, section := range sections {
+		k, v := util.StringSplit(section, '=', true)
+		k, v = strings.TrimSpace(k), cleanLine(v)
+		v = strings.TrimSuffix(strings.TrimPrefix(v, `"`), `"`)
+		err := parseKV(k, v, ret, logger)
+		if err != nil {
+			ret.Context = append(ret.Context, err.Error())
 		}
 	}
 	return ret
 }
 
-func parseNormalLine(line string, rl *rules.Rules, mode string, section string, logger util.Logger) (string, string) {
-	if strings.Contains(line, "=") {
-		k, v := util.StringSplit(line, '=', true)
-		k, v = strings.TrimSpace(k), strings.TrimSuffix(strings.TrimSpace(v), ",")
-		if strings.HasPrefix(v, "Some(") {
-			v = strings.TrimSuffix(strings.TrimPrefix(v, `Some(`), `)`)
+func parseKV(k string, v string, r *rules.Rules, logger util.Logger) error {
+	switch k {
+	case "id":
+		r.Key = v
+	case "title":
+		if v != "" {
+			r.Name = v
 		}
-		v = strings.TrimSuffix(strings.TrimPrefix(v, `"`), `"`)
-		switch k {
-		case "id":
-			rl.Key = v
-		case "title":
-			if v != "" {
-				rl.Name = v
+	case "completed":
+		r.Completed = v == "true"
+	case "layout":
+		r.Layout = v
+	case "like":
+		r.Like = v
+	default:
+		return errors.Errorf("[%s]: %s", k, v)
+	}
+	return nil
+}
+
+func cleanLine(l string) string {
+	l = strings.TrimSuffix(strings.TrimSpace(l), ",")
+	if strings.HasPrefix(l, "Some(") {
+		l = strings.TrimPrefix(strings.TrimSuffix(l, ")"), "Some(")
+	}
+	return l
+}
+
+func splitSections(content string) []string {
+	lines := strings.Split(content, "\n")
+	var ret []string
+	var curr string
+	for idx := range lines {
+		line := lines[idx]
+		clean := cleanLine(line)
+		if len(clean) == 0 || strings.HasPrefix(clean, "package ") || strings.HasPrefix(clean, "import ") || strings.HasPrefix(clean, "object ") {
+			continue
+		}
+		if strings.HasPrefix(line, "  ") {
+			if strings.HasPrefix(line, "    ") {
+				curr += "\n" + line
+				continue
 			}
-		case "completed":
-			rl.Completed = v == "true"
-		case "layout":
-			rl.Layout = v
-		case "like":
-			rl.Like = v
-		default:
-			logger.Info(k, "/", v)
+			if clean == ")" {
+				curr += "\n" + line
+				ret = append(ret, curr)
+				curr = ""
+				continue
+			}
+			if strings.Contains(line, "(") {
+				if strings.Contains(line, ")") {
+					ret = append(ret, line)
+				} else {
+					curr = line
+				}
+				continue
+			}
+			ret = append(ret, line)
 		}
 	}
-	return mode, section
+	if curr != "" {
+		ret = append(ret, curr)
+	}
+	return ret
 }
