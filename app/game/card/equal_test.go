@@ -5,10 +5,9 @@ package card_test
 import (
 	"testing"
 
+	"github.com/kyleu/solitaire/app/game/card"
 	"github.com/kyleu/solitaire/app/game/rank"
 	"github.com/kyleu/solitaire/app/game/suit"
-
-	"github.com/kyleu/solitaire/app/game/card"
 )
 
 type cardEqualTest struct {

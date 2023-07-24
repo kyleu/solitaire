@@ -1,11 +1,11 @@
 package card
 
 import (
-	"github.com/kyleu/solitaire/app/game/rank"
-	"github.com/kyleu/solitaire/app/game/suit"
 	"github.com/samber/lo"
 	"golang.org/x/exp/slices"
 
+	"github.com/kyleu/solitaire/app/game/rank"
+	"github.com/kyleu/solitaire/app/game/suit"
 	"github.com/kyleu/solitaire/app/util"
 )
 

@@ -2,6 +2,7 @@ package game
 
 import (
 	"github.com/google/uuid"
+
 	"github.com/kyleu/solitaire/app/game/deck"
 	"github.com/kyleu/solitaire/app/game/pile"
 	"github.com/kyleu/solitaire/app/game/rules"
