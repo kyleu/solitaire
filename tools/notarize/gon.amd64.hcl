@@ -3,7 +3,7 @@ source = ["./build/dist/darwin_darwin_amd64_v1/solitaire"]
 bundle_id = "dev.kyleu.solitaire"
 
 notarize {
-  path = "./build/dist/solitaire_0.0.3_darwin_amd64_desktop.dmg"
+  path = "./build/dist/solitaire_0.0.4_darwin_amd64_desktop.dmg"
   bundle_id = "dev.kyleu.solitaire"
 }
 
@@ -17,10 +17,10 @@ sign {
 }
 
 dmg {
-  output_path = "./build/dist/solitaire_0.0.3_darwin_amd64.dmg"
+  output_path = "./build/dist/solitaire_0.0.4_darwin_amd64.dmg"
   volume_name = "Solitaire"
 }
 
 zip {
-  output_path = "./build/dist/solitaire_0.0.3_darwin_amd64_notarized.zip"
+  output_path = "./build/dist/solitaire_0.0.4_darwin_amd64_notarized.zip"
 }
