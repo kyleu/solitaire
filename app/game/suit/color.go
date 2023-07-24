@@ -67,17 +67,13 @@ func (c Color) Name() string {
 	}
 }
 
-func (c *Color) MarshalJSON() ([]byte, error) {
-	return util.ToJSONBytes(c.Key(), false), nil
+func (c *Color) MarshalText() ([]byte, error) {
+	return []byte(c.Key()), nil
 }
 
-func (c *Color) UnmarshalJSON(data []byte) error {
-	var key string
-	err := util.FromJSON(data, &key)
-	if err != nil {
-		return errors.Wrapf(err, "Invalid suit key [%s]", string(data))
-	}
-	*c, err = ParseColor(key)
+func (c *Color) UnmarshalText(data []byte) error {
+	var err error
+	*c, err = ParseColor(string(data))
 	return err
 }
 

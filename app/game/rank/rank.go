@@ -1,11 +1,5 @@
 package rank
 
-import (
-	"github.com/pkg/errors"
-
-	"github.com/kyleu/solitaire/app/util"
-)
-
 type Rank uint8
 
 const (
@@ -25,16 +19,12 @@ const (
 	Unknown
 )
 
-func (r Rank) MarshalJSON() ([]byte, error) {
-	return util.ToJSONBytes(r.Key(), false), nil
+func (r Rank) MarshalText() ([]byte, error) {
+	return []byte(r.Key()), nil
 }
 
-func (r *Rank) UnmarshalJSON(data []byte) error {
-	var key string
-	err := util.FromJSON(data, &key)
-	if err != nil {
-		return errors.Wrapf(err, "Invalid suit key [%s]", string(data))
-	}
-	*r, err = Parse(key)
+func (r *Rank) UnmarshalText(data []byte) error {
+	var err error
+	*r, err = Parse(string(data))
 	return err
 }

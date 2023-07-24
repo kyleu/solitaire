@@ -3,8 +3,6 @@ package suit
 import (
 	"fmt"
 
-	"github.com/pkg/errors"
-
 	"github.com/kyleu/solitaire/app/util"
 )
 
@@ -133,16 +131,12 @@ func (s Suit) Color() Color {
 	}
 }
 
-func (s Suit) MarshalJSON() ([]byte, error) {
-	return util.ToJSONBytes(s.Key(), false), nil
+func (s Suit) MarshalText() ([]byte, error) {
+	return []byte(s.Key()), nil
 }
 
-func (s *Suit) UnmarshalJSON(data []byte) error {
-	var key string
-	err := util.FromJSON(data, &key)
-	if err != nil {
-		return errors.Wrapf(err, "Invalid suit key [%s]", string(data))
-	}
-	*s, err = Parse(key)
+func (s *Suit) UnmarshalText(data []byte) error {
+	var err error
+	*s, err = Parse(string(data))
 	return err
 }

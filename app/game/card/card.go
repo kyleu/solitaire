@@ -9,7 +9,6 @@ import (
 
 	"github.com/kyleu/solitaire/app/game/rank"
 	"github.com/kyleu/solitaire/app/game/suit"
-	"github.com/kyleu/solitaire/app/util"
 )
 
 type Card struct {
@@ -86,21 +85,16 @@ func (c *Card) String() string {
 	return ret
 }
 
-func (c *Card) MarshalJSON() ([]byte, error) {
-	return util.ToJSONBytes(c.String(), false), nil
+func (c *Card) MarshalText() ([]byte, error) {
+	return []byte(c.String()), nil
 }
 
-func (c *Card) UnmarshalJSON(data []byte) error {
-	var str string
-	err := util.FromJSON(data, &str)
-	if err != nil {
-		return errors.Wrapf(err, "Invalid card [%s]", string(data))
-	}
-	curr, err := FromCardString(str)
+func (c *Card) UnmarshalText(data []byte) error {
+	curr, err := FromCardString(string(data))
 	if err != nil {
 		return err
 	}
-	c.ReplaceFrom(curr)
+	*c = *curr
 	return nil
 }
 
