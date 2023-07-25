@@ -10,7 +10,7 @@ cd $dir/../..
 TGT=$1
 [ "$TGT" ] || TGT="v0.0.0"
 
-docker build -f tools/desktop/Dockerfile -t solitaire .
+docker build -f tools/desktop/Dockerfile.desktop -t solitaire .
 
 rm -rf tmp/release
 mkdir -p tmp/release

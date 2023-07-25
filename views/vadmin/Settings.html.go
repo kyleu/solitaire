@@ -104,8 +104,8 @@ func (p *Settings) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cuti
 //line views/vadmin/Settings.html:30
 	qw422016.N().S(`Admin Functions</h3>
       <ul class="mt">
+        <li><a href="/admin/server">App Information</a></li>
         <li><a href="/admin/modules">View Go modules</a></li>
-        <li><a href="/admin/gc">Collect garbage</a></li>
         <li><a href="/theme">Edit Themes</a></li>
       </ul>
     </div>
@@ -130,39 +130,40 @@ func (p *Settings) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cuti
 //line views/vadmin/Settings.html:48
 	qw422016.N().S(`App Profiling</h3>
       <ul class="mt">
+        <li><a href="/admin/memusage">Memory Usage</a></li>
+        <li><a href="/admin/gc">Collect garbage</a></li>
+        <li><a href="/admin/heap">Write memory dump</a></li>
         <li><a href="/admin/cpu/start">Start CPU profile</a></li>
         <li><a href="/admin/cpu/stop">Stop CPU profile</a></li>
-        <li><a href="/admin/heap">Write memory dump</a></li>
-        <li><a href="/admin/memusage">Memory Usage</a></li>
       </ul>
     </div>
   </div>
 `)
-//line views/vadmin/Settings.html:57
+//line views/vadmin/Settings.html:58
 }
 
-//line views/vadmin/Settings.html:57
+//line views/vadmin/Settings.html:58
 func (p *Settings) WriteBody(qq422016 qtio422016.Writer, as *app.State, ps *cutil.PageState) {
-//line views/vadmin/Settings.html:57
+//line views/vadmin/Settings.html:58
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line views/vadmin/Settings.html:57
+//line views/vadmin/Settings.html:58
 	p.StreamBody(qw422016, as, ps)
-//line views/vadmin/Settings.html:57
+//line views/vadmin/Settings.html:58
 	qt422016.ReleaseWriter(qw422016)
-//line views/vadmin/Settings.html:57
+//line views/vadmin/Settings.html:58
 }
 
-//line views/vadmin/Settings.html:57
+//line views/vadmin/Settings.html:58
 func (p *Settings) Body(as *app.State, ps *cutil.PageState) string {
-//line views/vadmin/Settings.html:57
+//line views/vadmin/Settings.html:58
 	qb422016 := qt422016.AcquireByteBuffer()
-//line views/vadmin/Settings.html:57
+//line views/vadmin/Settings.html:58
 	p.WriteBody(qb422016, as, ps)
-//line views/vadmin/Settings.html:57
+//line views/vadmin/Settings.html:58
 	qs422016 := string(qb422016.B)
-//line views/vadmin/Settings.html:57
+//line views/vadmin/Settings.html:58
 	qt422016.ReleaseByteBuffer(qb422016)
-//line views/vadmin/Settings.html:57
+//line views/vadmin/Settings.html:58
 	return qs422016
-//line views/vadmin/Settings.html:57
+//line views/vadmin/Settings.html:58
 }
