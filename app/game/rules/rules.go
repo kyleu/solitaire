@@ -32,6 +32,5 @@ type Rules struct {
 	Pyramids    any `json:"pyramids,omitempty"`
 	Special     any `json:"special,omitempty"`
 
-	Context []any  `json:"ctx,omitempty"`
-	Error   string `json:"error,omitempty"`
+	Error string `json:"error,omitempty"`
 }
