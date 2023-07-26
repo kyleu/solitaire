@@ -1,13 +1,12 @@
 package parse
 
 import (
-	"github.com/pkg/errors"
-
 	"github.com/kyleu/solitaire/app/game/rules"
 	"github.com/kyleu/solitaire/app/util"
+	"strings"
 )
 
-func parseKV(k string, v string, r *rules.Rules, logger util.Logger) error {
+func parseKV(k string, v string, r *rules.Rules, logger util.Logger) {
 	switch k {
 	case "id":
 		r.Key = v
@@ -21,40 +20,39 @@ func parseKV(k string, v string, r *rules.Rules, logger util.Logger) error {
 		r.Layout = v
 
 	case "aka":
-		r.AKA = map[string]string{"X": v} // todo
+		r.AKA = parseFromStringMap(v)
 	case "like":
-		r.Like = v // todo
+		r.Like = v
 	case "related":
-		r.Related = parseFromStringSeq(v) // todo
+		r.Related = parseFromStringSeq(v)
 	case "links":
-		r.Links = rules.Links{{Name: v}} // todo
+		r.Links = parseLinks(v)
 
 	case "victoryCondition":
-		r.VictoryCondition = v // todo
+		r.VictoryCondition = strings.TrimPrefix(v, "VictoryCondition.") // todo
 	case "cardRemovalMethod":
-		r.CardRemovalMethod = v // todo
+		r.CardRemovalMethod = strings.TrimPrefix(v, "CardRemovalMethod.") // todo
 	case "deckOptions":
-		r.DeckOptions = v // todo
+		r.DeckOptions = extractMap(extract(v, returnSame, logger)) // todo
 
 	case "stock":
-		r.Stock = v // todo
+		r.Stock = extractMap(extract(v, returnSame, logger)) // todo
 	case "waste":
-		r.Waste = v // todo
+		r.Waste = extractMap(extract(v, returnSame, logger)) // todo
 	case "reserves":
-		r.Reserves = v // todo
+		r.Reserves = extractMap(extract(v, returnSame, logger)) // todo
 	case "cells":
-		r.Cells = v // todo
+		r.Cells = extractMap(extract(v, returnSame, logger)) // todo
 	case "foundations":
-		r.Foundations = v // todo
+		r.Foundations = extractDoubleMap(v, logger) // todo
 	case "tableaus":
-		r.Tableaus = v // todo
+		r.Tableaus = extractDoubleMap(v, logger) // todo
 	case "pyramids":
-		r.Pyramids = v // todo
+		r.Pyramids = extractDoubleMap(v, logger) // todo
 	case "special":
-		r.Special = v // todo
+		r.Special = extractMap(extract(v, returnSame, logger)) // todo
 
 	default:
-		return errors.Errorf("[%s]: %s", k, v)
+		logger.Errorf("Missing [%s]: %s", k, v)
 	}
-	return nil
 }
