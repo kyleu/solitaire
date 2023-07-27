@@ -1,6 +1,9 @@
 package gamerules
 
-import "github.com/kyleu/solitaire/app/game/rules"
+import (
+	"github.com/kyleu/solitaire/app/game/rules"
+	"github.com/kyleu/solitaire/app/util"
+)
 
 var Klondike = &rules.Rules{
 	Key:       "klondike",
@@ -29,10 +32,10 @@ var Klondike = &rules.Rules{
 		{"Bill's Solitaire Tester", "www.roziturnbull.com/bill/Solitaire/solitaire.htm"},
 	},
 
-	Stock:    "StockRules(cardsDealt = StockCardsDealt.Count(3))",
-	Waste:    "WasteRules()",
-	Reserves: "FoundationRules(numPiles = 4, autoMoveCards = true)",
-	Tableaus: "TableauRules(emptyFilledWith = FillEmptyWith.HighRank)",
+	Stock:       &rules.Stock{},
+	Waste:       &rules.Waste{},
+	Foundations: []*rules.Foundation{{NumPiles: 4, AutoMoveCards: true}},
+	Tableaus:    []*rules.Tableau{{Extra: util.ValueMap{"emptyFilledWith": "FillEmptyWith.HighRank"}}},
 
 	Error: "",
 }

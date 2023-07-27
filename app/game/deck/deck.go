@@ -26,7 +26,7 @@ func (d *Deck) Empty() bool {
 
 func FreshDeck(numLoops int, ranks rank.Ranks, suits suit.Suits, faceUp bool, idOffset int) *Deck {
 	if len(ranks) == 0 {
-		ranks = rank.RanksAll
+		ranks = rank.RanksCommon
 	}
 	if len(suits) == 0 {
 		suits = suit.SuitsCommon

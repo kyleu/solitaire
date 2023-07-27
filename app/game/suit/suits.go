@@ -1,6 +1,8 @@
 package suit
 
 import (
+	"github.com/kyleu/solitaire/app/parse/extract"
+	"github.com/samber/lo"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -26,6 +28,7 @@ func (s Suits) Random() Suit {
 var (
 	SuitsCommon   = Suits{Hearts, Spades, Diamonds, Clubs}
 	SuitsExpanded = Suits{Hearts, Spades, Diamonds, Clubs, Horseshoes, Stars, Tridents, Moons}
+	SuitsAll      = Suits{Hearts, Spades, Diamonds, Clubs, Horseshoes, Stars, Tridents, Moons, Suitless, Unknown}
 	suitMap       = map[string]Suit{
 		"s": Spades, "spades": Spades,
 		"h": Hearts, "hearts": Hearts,
@@ -47,4 +50,20 @@ func Parse(key string) (Suit, error) {
 		return Suit(0), errors.Errorf("invalid suit [%s]", key)
 	}
 	return ret, nil
+}
+
+func FromName(name string) Suit {
+	name = strings.TrimSpace(strings.TrimPrefix(name, "Suit."))
+	return lo.FindOrElse(SuitsAll, Unknown, func(r Suit) bool {
+		return r.Name() == name || r.Key() == name
+	})
+}
+
+func FromSeqString(s string, logger util.Logger) Suits {
+	if strings.TrimPrefix(s, "Suit.") == "all" {
+		return SuitsExpanded
+	}
+	return extract.Extract(s, func(x string) Suit {
+		return FromName(strings.TrimPrefix(x, "Suit."))
+	}, logger)
 }

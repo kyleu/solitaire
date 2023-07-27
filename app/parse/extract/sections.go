@@ -1,8 +1,8 @@
-package parse
+package extract
 
 import "strings"
 
-func splitSections(content string) []string {
+func ExtractSections(content string) []string {
 	lines := strings.Split(content, "\n")
 	var ret []string
 	var curr string

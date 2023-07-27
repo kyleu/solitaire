@@ -1,5 +1,9 @@
 package rules
 
+import (
+	"github.com/kyleu/solitaire/app/game/deck"
+)
+
 type Link struct {
 	Name string `json:"name"`
 	URL  string `json:"url"`
@@ -18,19 +22,19 @@ type Rules struct {
 	Related []string          `json:"related,omitempty"`
 	Links   Links             `json:"links,omitempty"`
 
-	MaxPlayers        int `json:"maxPlayers,omitempty"`
-	VictoryCondition  any `json:"victoryCondition,omitempty"`
-	CardRemovalMethod any `json:"cardRemovalMethod,omitempty"`
-	DeckOptions       any `json:"deckOptions,omitempty"`
+	MaxPlayers        int           `json:"maxPlayers,omitempty"`
+	VictoryCondition  string        `json:"victoryCondition,omitempty"`
+	CardRemovalMethod string        `json:"cardRemovalMethod,omitempty"`
+	DeckOptions       *deck.Options `json:"deckOptions,omitempty"`
 
-	Stock       any `json:"stock,omitempty"`
-	Waste       any `json:"waste,omitempty"`
-	Reserves    any `json:"reserves,omitempty"`
-	Cells       any `json:"cells,omitempty"`
-	Foundations any `json:"foundations,omitempty"`
-	Tableaus    any `json:"tableaus,omitempty"`
-	Pyramids    any `json:"pyramids,omitempty"`
-	Special     any `json:"special,omitempty"`
+	Stock       *Stock        `json:"stock,omitempty"`
+	Waste       *Waste        `json:"waste,omitempty"`
+	Reserves    *Reserve      `json:"reserves,omitempty"`
+	Cells       *Cell         `json:"cells,omitempty"`
+	Foundations []*Foundation `json:"foundations,omitempty"`
+	Tableaus    []*Tableau    `json:"tableaus,omitempty"`
+	Pyramids    []*Pyramid    `json:"pyramids,omitempty"`
+	Special     *Special      `json:"special,omitempty"`
 
 	Error string `json:"error,omitempty"`
 }

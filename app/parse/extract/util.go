@@ -1,11 +1,12 @@
-package parse
+package extract
 
 import (
 	"github.com/kyleu/solitaire/app/util"
+	"strconv"
 	"strings"
 )
 
-func kvFor(section string) (string, string) {
+func KVFor(section string) (string, string) {
 	k, v := util.StringSplit(section, '=', true)
 	k, v = strings.TrimSpace(k), cleanLine(v)
 	v = strings.TrimSuffix(strings.TrimPrefix(v, `"`), `"`)
@@ -20,7 +21,7 @@ func cleanLine(l string) string {
 	return l
 }
 
-func parseFromStringSeq(v string) []string {
+func ParseFromStringSeq(v string) []string {
 	var ret []string
 	for {
 		start := strings.Index(v, `"`)
@@ -38,7 +39,7 @@ func parseFromStringSeq(v string) []string {
 	return ret
 }
 
-func parseFromStringMap(v string) map[string]string {
+func ParseFromStringMap(v string) map[string]string {
 	ret := map[string]string{}
 	var key string
 	for {
@@ -60,4 +61,15 @@ func parseFromStringMap(v string) map[string]string {
 		v = v[end+1:]
 	}
 	return ret
+}
+
+func parseIntFrom(s string, prefix string, logger util.Logger) int {
+	if prefix != "" {
+		s = strings.TrimPrefix(strings.TrimSuffix(s, ")"), prefix+"(")
+	}
+	i, err := strconv.ParseInt(s, 10, 32)
+	if err != nil {
+		logger.Errorf("invalid int from [%s]", s)
+	}
+	return int(i)
 }

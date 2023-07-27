@@ -1,6 +1,9 @@
 package gamerules
 
-import "github.com/kyleu/solitaire/app/game/rules"
+import (
+	"github.com/kyleu/solitaire/app/game/deck"
+	"github.com/kyleu/solitaire/app/game/rules"
+)
 
 var Example = &rules.Rules{
 	Key:       "example",
@@ -14,9 +17,9 @@ var Example = &rules.Rules{
 	Links:   rules.Links{{Name: "Solitaire", URL: "https://solitaire.kyleu.com"}},
 
 	MaxPlayers:        1,
-	VictoryCondition:  nil,
-	CardRemovalMethod: nil,
-	DeckOptions:       nil,
+	VictoryCondition:  "?",
+	CardRemovalMethod: "?",
+	DeckOptions:       &deck.Options{},
 
 	Stock:       nil,
 	Waste:       nil,

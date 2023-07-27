@@ -28,7 +28,7 @@ func onParseRules(_ context.Context, _ *app.State, logger util.Logger) (any, err
 			return &rules.Rules{Name: name, Error: err.Error()}
 		}
 		content := string(b)
-		return parse.ParseRulesContent(content, logger)
+		return parse.RulesContent(content, logger)
 	})
 	return ret, nil
 }

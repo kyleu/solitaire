@@ -1,4 +1,4 @@
-package parse
+package extract
 
 import (
 	"github.com/kyleu/solitaire/app/util"
@@ -11,7 +11,7 @@ func returnSame(s string) string {
 	return s
 }
 
-func extract[T any](v string, f func(s string) T, logger util.Logger) []T {
+func Extract[T any](v string, f func(s string) T, logger util.Logger) []T {
 	x, err := parseExtract(v)
 	if err != nil {
 		logger.Errorf("error extracting [%s]: %+v", v, err)
@@ -21,21 +21,21 @@ func extract[T any](v string, f func(s string) T, logger util.Logger) []T {
 	})
 }
 
-func extractDouble[T any](v string, f func(s string) T, logger util.Logger) [][]T {
-	return lo.Map(extract(v, returnSame, logger), func(x string, _ int) []T {
-		return extract(x, f, logger)
+func ExtractDouble[T any](v string, f func(s string) T, logger util.Logger) [][]T {
+	return lo.Map(Extract(v, returnSame, logger), func(x string, _ int) []T {
+		return Extract(x, f, logger)
 	})
 }
 
-func extractMap(v []string) map[string]string {
-	return lo.SliceToMap(v, func(s string) (string, string) {
-		return kvFor(s)
+func ExtractMap(v string, logger util.Logger) util.ValueMap {
+	return lo.SliceToMap(Extract(v, returnSame, logger), func(s string) (string, any) {
+		return KVFor(s)
 	})
 }
 
-func extractDoubleMap(v string, logger util.Logger) []map[string]string {
-	return lo.Map(extract(v, returnSame, logger), func(x string, _ int) map[string]string {
-		return extractMap(extract(x, returnSame, logger))
+func ExtractDoubleMap(v string, logger util.Logger) []util.ValueMap {
+	return lo.Map(Extract(v, returnSame, logger), func(x string, _ int) util.ValueMap {
+		return ExtractMap(x, logger)
 	})
 }
 

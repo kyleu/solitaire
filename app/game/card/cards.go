@@ -114,5 +114,5 @@ func RandomCards(amount int, suits suit.Suits, offset int) Cards {
 }
 
 func RandomCard(id int, suits suit.Suits) *Card {
-	return &Card{ID: id, Rank: rank.RanksAll.Random(), Suit: suits.Random(), FaceUp: util.RandomBool()}
+	return &Card{ID: id, Rank: rank.RanksCommon.Random(), Suit: suits.Random(), FaceUp: util.RandomBool()}
 }

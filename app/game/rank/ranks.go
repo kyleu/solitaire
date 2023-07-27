@@ -1,6 +1,8 @@
 package rank
 
 import (
+	"github.com/kyleu/solitaire/app/parse/extract"
+	"github.com/samber/lo"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -48,9 +50,13 @@ var (
 		"?": Unknown,
 	}
 
-	RanksAll = Ranks{
+	RanksCommon = Ranks{
 		Two, Three, Four, Five, Six, Seven, Eight,
 		Nine, Ten, Jack, Queen, King, Ace,
+	}
+	RanksAll = Ranks{
+		Two, Three, Four, Five, Six, Seven, Eight,
+		Nine, Ten, Jack, Queen, King, Ace, Unknown,
 	}
 )
 
@@ -61,4 +67,17 @@ func Parse(key string) (Rank, error) {
 		return Unknown, errors.Errorf("invalid suit [%s]", key)
 	}
 	return ret, nil
+}
+
+func FromName(name string) Rank {
+	name = strings.TrimSpace(strings.TrimPrefix(name, "Rank."))
+	return lo.FindOrElse(RanksAll, Unknown, func(r Rank) bool {
+		return r.Name() == name || r.Key() == name
+	})
+}
+
+func FromSeqString(s string, logger util.Logger) Ranks {
+	return extract.Extract(s, func(x string) Rank {
+		return FromName(strings.TrimPrefix(x, "Rank."))
+	}, logger)
 }
