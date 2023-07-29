@@ -2,7 +2,6 @@ package sandbox
 
 import (
 	"context"
-	"github.com/kyleu/solitaire/app/parse"
 	"os"
 	"strings"
 
@@ -11,6 +10,7 @@ import (
 	"github.com/kyleu/solitaire/app"
 	"github.com/kyleu/solitaire/app/game/rules"
 	"github.com/kyleu/solitaire/app/lib/filesystem"
+	"github.com/kyleu/solitaire/app/parse"
 	"github.com/kyleu/solitaire/app/util"
 )
 
