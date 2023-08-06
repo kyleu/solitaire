@@ -2,7 +2,7 @@
   "key": "solitaire",
   "name": "Solitaire",
   "icon": "heart",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "package": "github.com/kyleu/solitaire",
   "port": 7777,
   "modules": [
