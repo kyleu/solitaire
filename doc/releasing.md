@@ -1,11 +1,11 @@
 <!--- Content managed by Project Forge, see [projectforge.md] for details. -->
 # Releasing
 
-Solitaire uses `goreleaser` to create build artifacts. 
+Solitaire uses `goreleaser` to create build artifacts.
 
-You can release to GitHub using `./bin/build/release.sh`, or test the release by running `./bin/build/release-test.sh`. 
+You can release to GitHub using `./bin/build/release.sh`, or test the release by running `./bin/build/release-test.sh`.
 
-Your releases are available at https://github.com/kyleu/solitaire/releases 
+Your releases are available at https://github.com/kyleu/solitaire/releases
 
 ### Checksums
 
