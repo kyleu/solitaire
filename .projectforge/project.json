@@ -19,7 +19,7 @@
     "search",
     "themecatalog",
     "upgrade",
-    "wasm",
+    "wasmclient",
     "websocket"
   ],
   "tags": [
@@ -81,7 +81,6 @@
     }
   },
   "build": {
-    "publish": true,
     "changelog": true,
     "testsFail": true,
     "desktop": true,
@@ -89,7 +88,6 @@
     "signing": true,
     "android": true,
     "iOS": true,
-    "wasm": true,
     "x86": true,
     "windowsARM": true,
     "linuxARM": true,
