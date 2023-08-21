@@ -2,7 +2,6 @@ package sandbox
 
 import (
 	"context"
-	"os"
 	"strings"
 
 	"github.com/samber/lo"
@@ -17,9 +16,12 @@ import (
 var parseRules = &Sandbox{Key: "parseRules", Title: "Parse Rules", Icon: "heart", Run: onParseRules}
 
 func onParseRules(_ context.Context, _ *app.State, logger util.Logger) (any, error) {
-	fs := filesystem.NewFileSystem("../solitaire.gg/shared/src/main/scala/models/rules/impl")
-	files := lo.Map(fs.ListFiles(".", nil, logger), func(e os.DirEntry, _ int) string {
-		return e.Name()
+	fs, err := filesystem.NewFileSystem("../solitaire.gg/shared/src/main/scala/models/rules/impl", false, "")
+	if err != nil {
+		return nil, err
+	}
+	files := lo.Map(fs.ListFiles(".", nil, logger), func(e *filesystem.FileInfo, _ int) string {
+		return e.Name
 	})
 	ret := lo.Map(files, func(filename string, _ int) *rules.Rules {
 		b, err := fs.ReadFile(filename)

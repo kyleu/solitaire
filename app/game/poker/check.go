@@ -1,8 +1,9 @@
 package poker
 
 import (
+	"slices"
+
 	"github.com/samber/lo"
-	"golang.org/x/exp/slices"
 
 	"github.com/kyleu/solitaire/app/game/card"
 	"github.com/kyleu/solitaire/app/game/rank"

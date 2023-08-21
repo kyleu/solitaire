@@ -1,12 +1,13 @@
 package rank
 
 import (
+	"cmp"
 	"github.com/kyleu/solitaire/app/parse/extract"
 	"github.com/samber/lo"
+	"slices"
 	"strings"
 
 	"github.com/pkg/errors"
-	"golang.org/x/exp/slices"
 
 	"github.com/kyleu/solitaire/app/util"
 )
@@ -15,8 +16,8 @@ type Ranks []Rank
 
 func (r Ranks) Sorted() Ranks {
 	ret := slices.Clone(r)
-	slices.SortFunc(ret, func(l Rank, r Rank) bool {
-		return uint8(l) < uint8(r)
+	slices.SortFunc(ret, func(l Rank, r Rank) int {
+		return cmp.Compare(uint8(l), uint8(r))
 	})
 	return ret
 }

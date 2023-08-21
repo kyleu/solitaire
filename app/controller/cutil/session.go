@@ -3,11 +3,11 @@ package cutil
 
 import (
 	"context"
+	"slices"
 	"strings"
 
 	"github.com/mileusna/useragent"
 	"github.com/valyala/fasthttp"
-	"golang.org/x/exp/slices"
 
 	"github.com/kyleu/solitaire/app"
 	"github.com/kyleu/solitaire/app/controller/csession"

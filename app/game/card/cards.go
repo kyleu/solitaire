@@ -1,8 +1,9 @@
 package card
 
 import (
+	"cmp"
 	"github.com/samber/lo"
-	"golang.org/x/exp/slices"
+	"slices"
 
 	"github.com/kyleu/solitaire/app/game/rank"
 	"github.com/kyleu/solitaire/app/game/suit"
@@ -45,11 +46,11 @@ func (c Cards) WithSuit(s suit.Suit, max int) Cards {
 
 func (c Cards) Sorted() Cards {
 	ret := slices.Clone(c)
-	slices.SortFunc(ret, func(l *Card, r *Card) bool {
+	slices.SortFunc(ret, func(l *Card, r *Card) int {
 		if l.Rank == r.Rank {
-			return uint8(l.Suit) < uint8(r.Suit)
+			return cmp.Compare(uint8(l.Suit), uint8(r.Suit))
 		}
-		return uint8(l.Rank) < uint8(r.Rank)
+		return cmp.Compare(uint8(l.Rank), uint8(r.Rank))
 	})
 	return ret
 }

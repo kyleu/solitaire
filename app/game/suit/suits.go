@@ -1,12 +1,13 @@
 package suit
 
 import (
+	"cmp"
 	"github.com/kyleu/solitaire/app/parse/extract"
 	"github.com/samber/lo"
+	"slices"
 	"strings"
 
 	"github.com/pkg/errors"
-	"golang.org/x/exp/slices"
 
 	"github.com/kyleu/solitaire/app/util"
 )
@@ -15,8 +16,8 @@ type Suits []Suit
 
 func (s Suits) Sorted() Suits {
 	ret := slices.Clone(s)
-	slices.SortFunc(ret, func(l Suit, r Suit) bool {
-		return uint8(l) < uint8(r)
+	slices.SortFunc(ret, func(l Suit, r Suit) int {
+		return cmp.Compare(uint8(l), uint8(r))
 	})
 	return ret
 }
