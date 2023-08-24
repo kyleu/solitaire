@@ -2,13 +2,13 @@ package rank
 
 import (
 	"cmp"
-	"github.com/kyleu/solitaire/app/parse/extract"
-	"github.com/samber/lo"
 	"slices"
 	"strings"
 
 	"github.com/pkg/errors"
+	"github.com/samber/lo"
 
+	"github.com/kyleu/solitaire/app/parse/extract"
 	"github.com/kyleu/solitaire/app/util"
 )
 

@@ -2,8 +2,9 @@ package card
 
 import (
 	"cmp"
-	"github.com/samber/lo"
 	"slices"
+
+	"github.com/samber/lo"
 
 	"github.com/kyleu/solitaire/app/game/rank"
 	"github.com/kyleu/solitaire/app/game/suit"

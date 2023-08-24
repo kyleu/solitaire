@@ -2,11 +2,8 @@
 package main // import github.com/kyleu/solitaire
 
 import (
-	"os"
-
 	"github.com/kyleu/solitaire/app"
 	"github.com/kyleu/solitaire/app/cmd"
-	"github.com/kyleu/solitaire/app/lib/log"
 )
 
 var (
@@ -16,16 +13,5 @@ var (
 )
 
 func main() {
-	logger, err := cmd.Run(&app.BuildInfo{Version: version, Commit: commit, Date: date})
-	if err != nil {
-		const msg = "exiting due to error"
-		if logger == nil {
-			println(log.Red.Add(err.Error())) //nolint:forbidigo
-			println(log.Red.Add(msg))         //nolint:forbidigo
-		} else {
-			logger.Error(err)
-			logger.Error(msg)
-		}
-		os.Exit(1)
-	}
+	cmd.Entrypoint(&app.BuildInfo{Version: version, Commit: commit, Date: date})
 }
