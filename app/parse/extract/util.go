@@ -1,9 +1,10 @@
 package extract
 
 import (
-	"github.com/kyleu/solitaire/app/util"
 	"strconv"
 	"strings"
+
+	"github.com/kyleu/solitaire/app/util"
 )
 
 func KVFor(section string) (string, string) {

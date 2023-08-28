@@ -1,8 +1,9 @@
 package parse
 
 import (
-	"github.com/kyleu/solitaire/app/game/rules"
 	"strings"
+
+	"github.com/kyleu/solitaire/app/game/rules"
 )
 
 func parseLinks(v string) rules.Links {

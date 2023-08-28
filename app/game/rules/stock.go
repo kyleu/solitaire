@@ -1,9 +1,11 @@
 package rules
 
 import (
-	"github.com/kyleu/solitaire/app/util"
-	"github.com/samber/lo"
 	"strings"
+
+	"github.com/samber/lo"
+
+	"github.com/kyleu/solitaire/app/util"
 )
 
 type Stock struct {

@@ -1,11 +1,12 @@
 package parse
 
 import (
+	"strings"
+
 	"github.com/kyleu/solitaire/app/game/deck"
 	"github.com/kyleu/solitaire/app/game/rules"
 	"github.com/kyleu/solitaire/app/parse/extract"
 	"github.com/kyleu/solitaire/app/util"
-	"strings"
 )
 
 func RulesContent(content string, logger util.Logger) *rules.Rules {

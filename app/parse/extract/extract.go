@@ -1,10 +1,12 @@
 package extract
 
 import (
-	"github.com/kyleu/solitaire/app/util"
+	"strings"
+
 	"github.com/pkg/errors"
 	"github.com/samber/lo"
-	"strings"
+
+	"github.com/kyleu/solitaire/app/util"
 )
 
 func returnSame(s string) string {
