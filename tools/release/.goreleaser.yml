@@ -59,7 +59,7 @@ dist: "build/dist"
 nfpms:
   -
     vendor: "Kyle U"
-    homepage: "https://github.com/kyleu/solitaire}"
+    homepage: "https://github.com/kyleu/solitaire"
     maintainer: "Kyle U <solitaire@kyleu.com>"
     description: "A solitaire game... details soon"
     license: "MIT"
