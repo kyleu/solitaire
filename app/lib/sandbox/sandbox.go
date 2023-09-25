@@ -31,7 +31,7 @@ func (s Sandboxes) Get(key string) *Sandbox {
 
 // $PF_SECTION_START(sandboxes)$
 
-var AllSandboxes = Sandboxes{parseRules, wasm, testbed}
+var AllSandboxes = Sandboxes{parseRules, mtg, wasm, testbed}
 
 // $PF_SECTION_END(sandboxes)$
 
