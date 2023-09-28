@@ -5,10 +5,11 @@ import (
 	"encoding/json"
 	"os"
 
+	"github.com/samber/lo"
+
 	"github.com/kyleu/solitaire/app"
 	"github.com/kyleu/solitaire/app/lib/log"
 	"github.com/kyleu/solitaire/app/util"
-	"github.com/samber/lo"
 )
 
 var mtg = &Sandbox{Key: "mtg", Title: "Magic: The Gathering", Icon: "mobile", Run: onMTG}
