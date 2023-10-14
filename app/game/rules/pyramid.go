@@ -20,7 +20,7 @@ func PyramidFromMap(m util.ValueMap, logger util.Logger) *Pyramid {
 		case "name":
 			ret.Name = m.GetStringOpt(k)
 		default:
-			//logger.Errorf("unhandled pyramid options key [%s]", k)
+			// logger.Errorf("unhandled pyramid options key [%s]", k)
 		}
 	})
 	return ret

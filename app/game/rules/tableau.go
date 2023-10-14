@@ -20,7 +20,7 @@ func TableauFromMap(m util.ValueMap, logger util.Logger) *Tableau {
 		case "name":
 			ret.Name = m.GetStringOpt(k)
 		default:
-			//logger.Errorf("unhandled tableau options key [%s]", k)
+			// logger.Errorf("unhandled tableau options key [%s]", k)
 		}
 	})
 	return ret
