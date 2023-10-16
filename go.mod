@@ -24,7 +24,6 @@ require (
 	github.com/muesli/gamut v0.3.1
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.17.0
-	github.com/robert-nix/ansihtml v1.0.1
 	github.com/samber/lo v1.38.1
 	github.com/spf13/afero v1.10.0
 	github.com/valyala/fasthttp v1.50.0
@@ -41,7 +40,7 @@ require (
 )
 
 require (
-	github.com/andybalholm/brotli v1.0.5 // indirect
+	github.com/andybalholm/brotli v1.0.6 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cenkalti/backoff/v4 v4.2.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect

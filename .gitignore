@@ -9,4 +9,6 @@
 
 /client/node_modules
 
+/solitaire.sqlite
+
 .DS_Store
