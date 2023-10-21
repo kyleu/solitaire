@@ -17,14 +17,12 @@ func MenuFor(
 ) (menu.Items, any, error) {
 	var ret menu.Items
 	var data any
-	// $PF_SECTION_START(routes_start)$
-	// $PF_SECTION_END(routes_start)$
-	// $PF_SECTION_START(routes_end)$
+	// $PF_SECTION_START(routes)$
 	// This is your menu, feel free to customize it
 	admin := &menu.Item{Key: "admin", Title: "Settings", Description: "System-wide settings and preferences", Icon: "cog", Route: "/admin"}
 	ret = append(ret, gameMenu(ctx), menu.Separator, graphQLMenu(ctx, as.GraphQL), sandbox.Menu(ctx), admin)
 	const aboutDesc = "Get assistance and advice for using " + util.AppName
 	ret = append(ret, &menu.Item{Key: "about", Title: "About", Description: aboutDesc, Icon: "question", Route: "/about"})
-	// $PF_SECTION_END(routes_end)$
+	// $PF_SECTION_END(routes)$
 	return ret, data, nil
 }

@@ -5,7 +5,6 @@
   "github.com/kyleu/solitaire/app/util"
   "github.com/kyleu/solitaire/views/components"
   "github.com/kyleu/solitaire/views/layout"
-  "github.com/kyleu/solitaire/views/vutil"
 ) %}
 
 {% code type WASM struct {
@@ -27,5 +26,5 @@
     document.getElementById("load-status").innerText = "Loaded in [" + ms + "ms]";
   }
 </script>
-{%= vutil.WASMScript() %}
+{%= components.WASMScript() %}
 {% endfunc %}
