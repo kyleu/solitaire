@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"github.com/valyala/fasthttp"
+	"net/http"
 
 	"github.com/kyleu/solitaire/app"
 	"github.com/kyleu/solitaire/app/controller/cutil"
@@ -15,10 +15,10 @@ import (
 	"github.com/kyleu/solitaire/views/vgame"
 )
 
-func Game(rc *fasthttp.RequestCtx) {
-	Act("game", rc, func(as *app.State, ps *cutil.PageState) (string, error) {
+func Game(w http.ResponseWriter, r *http.Request) {
+	Act("game", w, r, func(as *app.State, ps *cutil.PageState) (string, error) {
 		ps.Data = []string{"/game/test/html", "/game/test/wasm"}
-		return Render(rc, as, &vgame.Index{}, ps, "game")
+		return Render(w, r, as, &vgame.Index{}, ps, "game")
 	})
 }
 
@@ -28,32 +28,32 @@ type TestJSONResponse struct {
 	PokerResult any `json:"pokerResult,omitempty"`
 }
 
-func GameTestJSON(rc *fasthttp.RequestCtx) {
-	Act("game.test.json", rc, func(as *app.State, ps *cutil.PageState) (string, error) {
+func GameTestJSON(w http.ResponseWriter, r *http.Request) {
+	Act("game.test.json", w, r, func(as *app.State, ps *cutil.PageState) (string, error) {
 		g := game.New(gamerules.Example)
 		hand := pile.Pile{ID: "test", Options: &pile.Options{}, Cards: card.RandomCards(5, suit.SuitsCommon, 1)}
 		result := poker.Check(hand.Cards)
 		ret := &TestJSONResponse{Game: g, PokerHand: hand, PokerResult: result}
 		ps.Data = ret
 		ps.Title = "JSON Test"
-		return Render(rc, as, &views.Debug{}, ps, "game", "json")
+		return Render(w, r, as, &views.Debug{}, ps, "game", "json")
 	})
 }
 
-func GameTestHTML(rc *fasthttp.RequestCtx) {
-	Act("game.test.html", rc, func(as *app.State, ps *cutil.PageState) (string, error) {
+func GameTestHTML(w http.ResponseWriter, r *http.Request) {
+	Act("game.test.html", w, r, func(as *app.State, ps *cutil.PageState) (string, error) {
 		g := game.New(gamerules.Example)
 		ps.Data = g
 		ps.Title = "HTML Test"
-		return Render(rc, as, &vgame.HTML{Game: g}, ps, "game", "html")
+		return Render(w, r, as, &vgame.HTML{Game: g}, ps, "game", "html")
 	})
 }
 
-func GameTestWASM(rc *fasthttp.RequestCtx) {
-	Act("game.test.wasm", rc, func(as *app.State, ps *cutil.PageState) (string, error) {
+func GameTestWASM(w http.ResponseWriter, r *http.Request) {
+	Act("game.test.wasm", w, r, func(as *app.State, ps *cutil.PageState) (string, error) {
 		g := game.New(gamerules.Example)
 		ps.Data = g
 		ps.Title = "WASM Test"
-		return Render(rc, as, &vgame.WASM{Game: g}, ps, "game", "wasm")
+		return Render(w, r, as, &vgame.WASM{Game: g}, ps, "game", "wasm")
 	})
 }

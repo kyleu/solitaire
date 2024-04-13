@@ -2,57 +2,54 @@
 package routes
 
 import (
-	"github.com/fasthttp/router"
-	"github.com/valyala/fasthttp"
+	"net/http"
+
+	"github.com/gorilla/mux"
 
 	"github.com/kyleu/solitaire/app"
 	"github.com/kyleu/solitaire/app/controller"
 	"github.com/kyleu/solitaire/app/controller/clib"
 	"github.com/kyleu/solitaire/app/controller/cutil"
-	"github.com/kyleu/solitaire/app/lib/telemetry/httpmetrics"
 	"github.com/kyleu/solitaire/app/util"
 )
 
+func makeRoute(x *mux.Router, method string, path string, f http.HandlerFunc) {
+	cutil.AddRoute(method, path)
+	x.HandleFunc(path, f).Methods(method)
+}
+
 //nolint:revive
-func AppRoutes(as *app.State, logger util.Logger) fasthttp.RequestHandler {
-	r := router.New()
+func AppRoutes(as *app.State, logger util.Logger) (http.Handler, error) {
+	r := mux.NewRouter()
 
-	r.GET("/", controller.Home)
-	r.GET("/healthcheck", clib.Healthcheck)
-	r.GET("/about", clib.About)
+	makeRoute(r, http.MethodGet, "/", controller.Home)
+	makeRoute(r, http.MethodGet, "/healthcheck", clib.Healthcheck)
+	makeRoute(r, http.MethodGet, "/about", clib.About)
 
-	r.GET(cutil.DefaultProfilePath, clib.Profile)
-	r.POST(cutil.DefaultProfilePath, clib.ProfileSave)
-	r.GET(cutil.DefaultSearchPath, clib.Search)
+	makeRoute(r, http.MethodGet, cutil.DefaultProfilePath, clib.Profile)
+	makeRoute(r, http.MethodPost, cutil.DefaultProfilePath, clib.ProfileSave)
+	makeRoute(r, http.MethodGet, cutil.DefaultSearchPath, clib.Search)
+
 	themeRoutes(r)
 
 	// $PF_SECTION_START(routes)$
-	r.GET("/game", controller.Game)
-	r.GET("/game/test/json", controller.GameTestJSON)
-	r.GET("/game/test/html", controller.GameTestHTML)
-	r.GET("/game/test/wasm", controller.GameTestWASM)
+	makeRoute(r, http.MethodGet, "/game", controller.Game)
+	makeRoute(r, http.MethodGet, "/game/test/json", controller.GameTestJSON)
+	makeRoute(r, http.MethodGet, "/game/test/html", controller.GameTestHTML)
+	makeRoute(r, http.MethodGet, "/game/test/wasm", controller.GameTestWASM)
 	// $PF_SECTION_END(routes)$
 
-	r.GET("/graphql", controller.GraphQLIndex)
-	r.GET("/graphql/{key}", controller.GraphQLDetail)
-	r.POST("/graphql/{key}", controller.GraphQLRun)
+	makeRoute(r, http.MethodGet, "/graphql", clib.GraphQLIndex)
+	makeRoute(r, http.MethodGet, "/graphql/{key}", clib.GraphQLDetail)
+	makeRoute(r, http.MethodPost, "/graphql/{key}", clib.GraphQLRun)
 
-	r.GET("/admin", clib.Admin)
-	r.GET("/admin/sandbox", controller.SandboxList)
-	r.GET("/admin/sandbox/{key}", controller.SandboxRun)
-	r.GET("/admin/{path:*}", clib.Admin)
-	r.POST("/admin/{path:*}", clib.Admin)
+	adminRoutes(r)
 
-	r.GET("/favicon.ico", clib.Favicon)
-	r.GET("/robots.txt", clib.RobotsTxt)
-	r.GET("/assets/{_:*}", clib.Static)
+	makeRoute(r, http.MethodGet, "/favicon.ico", clib.Favicon)
+	makeRoute(r, http.MethodGet, "/robots.txt", clib.RobotsTxt)
+	makeRoute(r, http.MethodGet, "/assets/{path:.*}", clib.Static)
 
-	r.OPTIONS("/", controller.Options)
-	r.OPTIONS("/{_:*}", controller.Options)
-	r.NotFound = controller.NotFound
+	makeRoute(r, http.MethodOptions, "/", controller.Options)
 
-	clib.AppRoutesList = r.List()
-
-	p := httpmetrics.NewMetrics(util.AppKey, logger)
-	return fasthttp.CompressHandlerLevel(p.WrapHandler(r, true), fasthttp.CompressBestSpeed)
+	return cutil.WireRouter(r, controller.NotFoundAction, logger)
 }

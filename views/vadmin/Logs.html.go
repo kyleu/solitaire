@@ -2,18 +2,18 @@
 // See https://github.com/valyala/quicktemplate for details.
 
 // <!-- Content managed by Project Forge, see [projectforge.md] for details. -->
-// <!-- Content managed by Project Forge, see [projectforge.md] for details. -->
 
-//line views/vadmin/Logs.html:3
+//line views/vadmin/Logs.html:2
 package vadmin
 
-//line views/vadmin/Logs.html:3
+//line views/vadmin/Logs.html:2
 import (
 	"go.uber.org/zap/zapcore"
 
 	"github.com/kyleu/solitaire/app"
 	"github.com/kyleu/solitaire/app/controller/cutil"
 	"github.com/kyleu/solitaire/app/util"
+	"github.com/kyleu/solitaire/views/components"
 	"github.com/kyleu/solitaire/views/layout"
 )
 
@@ -41,7 +41,11 @@ func (p *Logs) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.Pa
 //line views/vadmin/Logs.html:17
 	qw422016.N().S(`
   <div class="card">
-    <h3>Recent Logs</h3>
+    <h3>`)
+//line views/vadmin/Logs.html:19
+	components.StreamSVGRefIcon(qw422016, `filter`, ps)
+//line views/vadmin/Logs.html:19
+	qw422016.N().S(`Recent Logs</h3>
     `)
 //line views/vadmin/Logs.html:20
 	streamlogTable(qw422016, p.Logs)

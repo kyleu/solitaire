@@ -7,8 +7,8 @@ import (
 	"slices"
 	"sync/atomic"
 
-	"github.com/fasthttp/websocket"
 	"github.com/google/uuid"
+	"github.com/gorilla/websocket"
 	"github.com/pkg/errors"
 	"github.com/samber/lo"
 
@@ -30,7 +30,7 @@ func (s *Service) write(connID uuid.UUID, message string, logger util.Logger) er
 	atomic.AddInt64(&count, 1)
 
 	if !ok {
-		return errors.New("cannot load connection [" + connID.String() + "]")
+		return errors.Errorf("cannot load connection [%s] for writing", connID.String())
 	}
 	c.mu.Lock()
 	defer c.mu.Unlock()
@@ -92,7 +92,7 @@ func (s *Service) Broadcast(message *Message, logger util.Logger, except ...uuid
 func (s *Service) ReadLoop(ctx context.Context, connID uuid.UUID, logger util.Logger) error {
 	c, ok := s.connections[connID]
 	if !ok {
-		return errors.New("cannot load connection [" + connID.String() + "]")
+		return errors.Errorf("cannot load connection [%s] for reading", connID.String())
 	}
 	d := func() error {
 		_, err := s.Disconnect(connID, logger)
@@ -117,12 +117,6 @@ func ReadSocketLoop(connID uuid.UUID, sock *websocket.Conn, onMessage func(m *Me
 			err := onDisconnect()
 			if err != nil {
 				logger.Warn(fmt.Sprintf("error running onDisconnect for [%v]: %+v", connID, err))
-			}
-		}
-		if onDisconnect == nil {
-			err := onDisconnect()
-			if err != nil {
-				logger.Warn(fmt.Sprintf("error running disconnect for [%v]: %+v", connID, err))
 			}
 		}
 		logger.Debug(fmt.Sprintf("closed websocket [%v]", connID.String()))

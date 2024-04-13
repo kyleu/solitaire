@@ -2,20 +2,17 @@
 package websocket
 
 import (
-	"cmp"
 	"context"
 	"encoding/json"
 	"fmt"
-	"slices"
+	"net/http"
 	"strings"
 	"sync"
 
-	"github.com/fasthttp/websocket"
 	"github.com/google/uuid"
+	"github.com/gorilla/websocket"
 	"github.com/samber/lo"
-	"github.com/valyala/fasthttp"
 
-	"github.com/kyleu/solitaire/app/lib/filter"
 	"github.com/kyleu/solitaire/app/lib/user"
 	"github.com/kyleu/solitaire/app/util"
 )
@@ -54,58 +51,10 @@ var (
 	}
 )
 
-func (s *Service) UserList(params *filter.Params) Statuses {
-	params = filter.ParamsWithDefaultOrdering("connection", params)
-	ret := make(Statuses, 0)
-	ret = append(ret, systemStatus)
-	idx := 0
-	lo.ForEach(lo.Values(s.connections), func(conn *Connection, _ int) {
-		if idx >= params.Offset && (params.Limit == 0 || idx < params.Limit) {
-			ret = append(ret, conn.ToStatus())
-		}
-		idx++
-	})
-	return ret
-}
-
-func (s *Service) ChannelList(params *filter.Params) []string {
-	params = filter.ParamsWithDefaultOrdering("channel", params)
-	ret := make([]string, 0)
-	idx := 0
-	lo.ForEach(lo.Keys(s.channels), func(conn string, _ int) {
-		if idx >= params.Offset && (params.Limit == 0 || idx < params.Limit) {
-			ret = append(ret, conn)
-		}
-		idx++
-	})
-	return util.ArraySorted(ret)
-}
-
-func (s *Service) GetByID(id uuid.UUID, logger util.Logger) *Status {
-	if id == systemID {
-		return systemStatus
-	}
-	conn, ok := s.connections[id]
-	if !ok {
-		logger.Error(fmt.Sprintf("error getting connection by id [%v]", id))
-		return nil
-	}
-	return conn.ToStatus()
-}
-
-func (s *Service) Count() int {
-	return len(s.connections)
-}
-
-func (s *Service) Status() ([]string, []*Connection, []uuid.UUID) {
-	s.connectionsMu.Lock()
-	defer s.connectionsMu.Unlock()
-	conns := lo.Values(s.connections)
-	slices.SortFunc(conns, func(l *Connection, r *Connection) int {
-		return cmp.Compare(l.ID.String(), r.ID.String())
-	})
-	taps := slices.Clone(lo.Keys(s.taps))
-	return s.ChannelList(nil), conns, taps
+func (s *Service) ReplaceHandlers(onOpen ConnectEvent, handler Handler, onClose ConnectEvent) {
+	s.onOpen = onOpen
+	s.handler = handler
+	s.onClose = onClose
 }
 
 func (s *Service) Close() {
@@ -116,28 +65,31 @@ func (s *Service) Close() {
 	})
 }
 
-var upgrader = websocket.FastHTTPUpgrader{EnableCompression: true}
+var upgrader = websocket.Upgrader{EnableCompression: true}
 
 func (s *Service) Upgrade(
-	ctx context.Context, rc *fasthttp.RequestCtx, channel string, profile *user.Profile, logger util.Logger,
+	ctx context.Context, w http.ResponseWriter, r *http.Request, channel string, profile *user.Profile, logger util.Logger,
 ) error {
-	return upgrader.Upgrade(rc, func(conn *websocket.Conn) {
-		cx, err := s.Register(profile, conn, logger)
-		if err != nil {
-			logger.Warn("unable to register websocket connection")
-			return
+	conn, err := upgrader.Upgrade(w, r, nil)
+	if err != nil {
+		return err
+	}
+	cx, err := s.Register(profile, conn, logger)
+	if err != nil {
+		logger.Warnf("unable to register websocket connection: %+v", err)
+		return nil
+	}
+	joined, err := s.Join(cx.ID, channel, logger)
+	if err != nil {
+		logger.Error(fmt.Sprintf("error processing socket join (%v): %+v", joined, err))
+		return nil
+	}
+	err = s.ReadLoop(ctx, cx.ID, logger)
+	if err != nil {
+		if !strings.Contains(err.Error(), "1001") {
+			logger.Error(fmt.Sprintf("error processing socket read loop for connection [%s]: %+v", cx.ID.String(), err))
 		}
-		joined, err := s.Join(cx.ID, channel, logger)
-		if err != nil {
-			logger.Error(fmt.Sprintf("error processing socket join (%v): %+v", joined, err))
-			return
-		}
-		err = s.ReadLoop(ctx, cx.ID, logger)
-		if err != nil {
-			if !strings.Contains(err.Error(), "1001") {
-				logger.Error(fmt.Sprintf("error processing socket read loop for connection [%s]: %+v", cx.ID.String(), err))
-			}
-			return
-		}
-	})
+		return nil
+	}
+	return nil
 }

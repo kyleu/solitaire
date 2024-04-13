@@ -10,7 +10,6 @@ import {timeInit} from "./time";
 import {autocompleteInit} from "./autocomplete";
 import {modalInit} from "./modal";
 import {tagsInit} from "./tags";
-import {editorInit} from "./editor";
 import {formInit} from "./form";
 import {themeInit} from "./theme";
 import {socketInit} from "./socket";
@@ -19,7 +18,8 @@ import {appInit} from "./app";
 declare global {
   interface Window { // eslint-disable-line @typescript-eslint/consistent-type-definitions
     "solitaire": {
-      relativeTime: (time: string, el?: HTMLElement) => string;
+      wireTime: (el: HTMLElement) => void;
+      relativeTime: (el: HTMLElement) => string;
       autocomplete: (el: HTMLInputElement, url: string, field: string, title: (x: unknown) => string, val: (x: unknown) => string) => void;
       setSiblingToNull: (el: HTMLElement) => void;
       initForm: (frm: HTMLFormElement) => void;
@@ -34,8 +34,10 @@ declare global {
 
 export function init(): void {
   const [s, i] = formInit();
+  const [wireTime, relativeTime] = timeInit();
   window.solitaire = {
-    relativeTime: timeInit(),
+    wireTime: wireTime,
+    relativeTime: relativeTime,
     autocomplete: autocompleteInit(),
     setSiblingToNull: s,
     initForm: i,
@@ -48,7 +50,6 @@ export function init(): void {
   linkInit();
   modalInit();
   themeInit();
-  editorInit();
   window.audit = audit;
   window.JSX = JSX;
   appInit();
