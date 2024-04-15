@@ -18,7 +18,7 @@ import (
 func Game(w http.ResponseWriter, r *http.Request) {
 	Act("game", w, r, func(as *app.State, ps *cutil.PageState) (string, error) {
 		ps.Data = []string{"/game/test/html", "/game/test/wasm"}
-		return Render(w, r, as, &vgame.Index{}, ps, "game")
+		return Render(r, as, &vgame.Index{}, ps, "game")
 	})
 }
 
@@ -36,7 +36,7 @@ func GameTestJSON(w http.ResponseWriter, r *http.Request) {
 		ret := &TestJSONResponse{Game: g, PokerHand: hand, PokerResult: result}
 		ps.Data = ret
 		ps.Title = "JSON Test"
-		return Render(w, r, as, &views.Debug{}, ps, "game", "json")
+		return Render(r, as, &views.Debug{}, ps, "game", "json")
 	})
 }
 
@@ -45,7 +45,7 @@ func GameTestHTML(w http.ResponseWriter, r *http.Request) {
 		g := game.New(gamerules.Example)
 		ps.Data = g
 		ps.Title = "HTML Test"
-		return Render(w, r, as, &vgame.HTML{Game: g}, ps, "game", "html")
+		return Render(r, as, &vgame.HTML{Game: g}, ps, "game", "html")
 	})
 }
 
@@ -54,6 +54,6 @@ func GameTestWASM(w http.ResponseWriter, r *http.Request) {
 		g := game.New(gamerules.Example)
 		ps.Data = g
 		ps.Title = "WASM Test"
-		return Render(w, r, as, &vgame.WASM{Game: g}, ps, "game", "wasm")
+		return Render(r, as, &vgame.WASM{Game: g}, ps, "game", "wasm")
 	})
 }
