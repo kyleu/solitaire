@@ -5,12 +5,10 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"strings"
 	"sync"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
-	"github.com/robert-nix/ansihtml"
 	"github.com/samber/lo"
 
 	"github.com/kyleu/solitaire/app/lib/user"
@@ -81,13 +79,4 @@ func (s *Service) Upgrade(
 		return uuid.Nil, nil
 	}
 	return cx.ID, nil
-}
-
-func (s *Service) Terminal(ch string, logger util.Logger) func(key string, b []byte) error {
-	return func(key string, b []byte) error {
-		html := string(ansihtml.ConvertToHTML(b))
-		m := util.ValueMap{"msg": string(b), "html": strings.TrimSpace(html)}
-		msg := NewMessage(nil, ch, "output", m)
-		return s.WriteChannel(msg, logger)
-	}
 }
