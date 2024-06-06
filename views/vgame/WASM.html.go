@@ -40,7 +40,7 @@ func (p *WASM) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.Pa
 <div class="card">
   <h3>`)
 //line views/vgame/WASM.html:17
-	components.StreamSVGRefIcon(qw422016, `gift`, ps)
+	components.StreamSVGIcon(qw422016, `gift`, ps)
 //line views/vgame/WASM.html:17
 	qw422016.E().S(util.AppName)
 //line views/vgame/WASM.html:17
