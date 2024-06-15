@@ -11,6 +11,7 @@ const (
 	AppSource  = "https://github.com/kyleu/solitaire"
 	AppLegal   = `Built by <a href="mailto:solitaire@kyleu.com">Kyle U</a>, all rights reserved`
 
+	KeyDebug   = "debug"
 	KeyError   = "error"
 	KeyRandom  = "random"
 	KeyUnknown = "unknown"
