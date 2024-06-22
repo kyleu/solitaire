@@ -1,4 +1,6 @@
 # http://goreleaser.com
+version: 2
+
 project_name: solitaire
 
 archives:
@@ -15,7 +17,7 @@ brews:
     commit_author:
       name: "Kyle U"
       email: "solitaire@kyleu.com"
-    folder: Formula
+    directory: Formula
     homepage: "https://github.com/kyleu/solitaire"
     description: "A solitaire game... details soon"
     license: "MIT"
