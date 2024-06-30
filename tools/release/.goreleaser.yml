@@ -180,6 +180,7 @@ builds:
       - "windows"
     goarch:
       - "amd64"
+      - "arm64"
     mod_timestamp: "{{ .CommitTimestamp }}"
 
   - id: "windows_386"
@@ -194,7 +195,6 @@ builds:
       - "windows"
     goarch:
       - "arm"
-      - "arm64"
     goarm:
       - "5"
       - "6"
