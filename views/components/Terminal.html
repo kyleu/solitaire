@@ -1,0 +1,28 @@
+{% import (
+  "github.com/robert-nix/ansihtml"
+	"github.com/samber/lo"
+
+  "github.com/kyleu/solitaire/app/util"
+) %}
+
+{% func Terminal(id string, s ...string) %}{% stripspace %}
+  {%- code
+    lines := lo.Flatten(lo.Map(s, func(x string, _ int) []string {
+      raw := string(ansihtml.ConvertToHTML([]byte(x)))
+      return util.StringSplitLines(raw)
+    }))
+    if len(lines) > 0 && lines[len(lines) - 1] == "" {
+      lines = lines[:len(lines) - 1]
+    }
+  -%}
+  <div class="overflow full-width">
+    <table class="terminal">
+      <tbody id="{%s id %}">
+        <tr><td class="shrink"></td><td></td></tr>
+        {%- for idx, line := range lines -%}
+        <tr><th>{%d idx + 1 %}</th><td>{%s= line %}</td></tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+  </div>
+{% endstripspace %}{% endfunc %}

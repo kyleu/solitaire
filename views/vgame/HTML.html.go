@@ -42,6 +42,8 @@ func (p *HTML) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.Pa
 //line views/vgame/HTML.html:17
 	components.StreamSVGIcon(qw422016, `gift`, ps)
 //line views/vgame/HTML.html:17
+	qw422016.N().S(` `)
+//line views/vgame/HTML.html:17
 	qw422016.E().S(util.AppName)
 //line views/vgame/HTML.html:17
 	qw422016.N().S(` HTML</h3>

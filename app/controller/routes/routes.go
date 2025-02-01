@@ -41,6 +41,7 @@ func AppRoutes(as *app.State, logger util.Logger) (http.Handler, error) {
 	makeRoute(r, http.MethodGet, "/graphql/{key}", clib.GraphQLDetail)
 	makeRoute(r, http.MethodPost, "/graphql/{key}", clib.GraphQLRun)
 
+	execRoutes(r)
 	adminRoutes(r)
 
 	makeRoute(r, http.MethodGet, "/favicon.ico", clib.Favicon)

@@ -25,24 +25,24 @@ func (c Cards) Suits() suit.Suits {
 	})
 }
 
-func (c Cards) WithRank(r rank.Rank, max int) Cards {
+func (c Cards) WithRank(r rank.Rank, mx int) Cards {
 	ret := lo.Filter(c, func(crd *Card, _ int) bool {
 		return crd.Rank == r
 	})
-	if max == 0 || len(ret) <= max {
+	if mx == 0 || len(ret) <= mx {
 		return ret
 	}
-	return ret[:max]
+	return ret[:mx]
 }
 
-func (c Cards) WithSuit(s suit.Suit, max int) Cards {
+func (c Cards) WithSuit(s suit.Suit, mx int) Cards {
 	ret := lo.Filter(c, func(crd *Card, _ int) bool {
 		return crd.Suit == s
 	})
-	if max == 0 || len(ret) <= max {
+	if mx == 0 || len(ret) <= mx {
 		return ret
 	}
-	return ret[:max]
+	return ret[:mx]
 }
 
 func (c Cards) Sorted() Cards {

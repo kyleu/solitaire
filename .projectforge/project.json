@@ -6,8 +6,8 @@
   "package": "github.com/kyleu/solitaire",
   "port": 7777,
   "modules": [
-    "android",
     "core",
+    "android",
     "desktop",
     "filesystem",
     "graphql",
@@ -15,6 +15,7 @@
     "jsx",
     "marketing",
     "notarize",
+    "process",
     "sandbox",
     "search",
     "themecatalog",
@@ -38,7 +39,10 @@
     "bundle": "dev.kyleu.solitaire",
     "signingIdentity": "Developer ID Application: Kyle Unverferth (C6S478FYLD)",
     "notarizeEmail": "kyle@kyleu.com",
-    "javaPackage": "dev.kyleu.solitaire"
+    "javaPackage": "dev.kyleu.solitaire",
+    "deployments": [
+      "ts:game"
+    ]
   },
   "theme": {
     "light": {

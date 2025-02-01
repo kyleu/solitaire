@@ -1,10 +1,11 @@
 package deck
 
 import (
+	"github.com/samber/lo"
+
 	"github.com/kyleu/solitaire/app/game/rank"
 	"github.com/kyleu/solitaire/app/game/suit"
 	"github.com/kyleu/solitaire/app/util"
-	"github.com/samber/lo"
 )
 
 type Options struct {

@@ -1,0 +1,23 @@
+#game-wrapper {
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.game-header {
+  margin-bottom: 0;
+}
+
+.game {
+  flex-grow: 1;
+  margin-bottom: 0;
+}
+
+.game .panel {
+  margin-bottom: var(--padding);
+}
+
+/* Template */
+.game .template {
+  display: none !important;
+}

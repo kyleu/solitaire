@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../client/src/game/style/layout.css"],
+  "sourcesContent": ["#game-wrapper {\n  flex-direction: column;\n  height: 100%;\n  width: 100%;\n}\n\n.game-header {\n  margin-bottom: 0;\n}\n\n.game {\n  flex-grow: 1;\n  margin-bottom: 0;\n}\n\n.game .panel {\n  margin-bottom: var(--padding);\n}\n\n/* Template */\n.game .template {\n  display: none !important;\n}\n"],
+  "mappings": "AAAA,CAAC,aACC,eAAgB,OAChB,OAAQ,KACR,MAAO,IACT,CAEA,CAAC,YACC,cAAe,CACjB,CAEA,CAAC,KACC,UAAW,EACX,cAAe,CACjB,CAEA,CALC,KAKK,CAAC,MACL,cAAe,IAAI,UACrB,CAGA,CAVC,KAUK,CAAC,SACL,QAAS,cACX",
+  "names": []
+}

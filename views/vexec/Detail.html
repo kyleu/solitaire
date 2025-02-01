@@ -1,0 +1,93 @@
+{% import (
+  "strings"
+
+  "github.com/kyleu/solitaire/app"
+  "github.com/kyleu/solitaire/app/controller/cutil"
+  "github.com/kyleu/solitaire/app/lib/exec"
+  "github.com/kyleu/solitaire/app/util"
+  "github.com/kyleu/solitaire/views/components"
+  "github.com/kyleu/solitaire/views/layout"
+) %}
+
+{% code type Detail struct {
+  layout.Basic
+  Exec *exec.Exec
+} %}
+
+{% func (p *Detail) Body(as *app.State, ps *cutil.PageState) %}
+  {%= ExecDetail(p.Exec, ps) %}
+  <div class="card">
+    <h3>{%= components.SVGIcon("file", ps) %} Output</h3>
+    <div class="mt">{%= components.Terminal("console-list", p.Exec.Buffer.String()) %}</div>
+  </div>
+  {%= ExecScript(as.Debug, "console-list", p.Exec.WebPath() + "/connect", true, ps) %}
+{% endfunc %}
+
+{% func ExecDetail(ex *exec.Exec, ps *cutil.PageState) %}
+  <div class="card">
+    {%- if ex.Completed == nil -%}
+    <div class="right">
+      <a href="{%s ex.WebPath() %}/kill"><button>Kill</button></a>
+    </div>
+    {%- endif -%}
+    <h3>{%= components.SVGIcon("desktop", ps) %} Process [{%s ex.String() %}]</h3>
+    <div class="overflow full-width">
+      <table>
+        <tbody>
+          <tr>
+            <th class="shrink">Key</th>
+            <td>{% if len(ex.Link) > 0 %}<a href="{%s ex.Link %}">{%s ex.Key %}</a>{% else %}{%s ex.Key %}{% endif %}</td>
+          </tr>
+          <tr>
+            <th>Index</th>
+            <td>{%d ex.Idx %}</td>
+          </tr>
+          <tr>
+            <th>PID</th>
+            <td>{%d ex.PID %}</td>
+          </tr>
+          <tr>
+            <th>Command</th>
+            <td>{%s ex.Cmd %}</td>
+          </tr>
+          <tr>
+            <th>Path</th>
+            <td>{%s ex.Path %}</td>
+          </tr>
+          <tr>
+            <th>Environment</th>
+            <td>
+              <ul>
+                {%- for _, x := range ex.Env -%}
+                <li>{%s x %}</li>
+                {%- endfor -%}
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>Started</th>
+            <td title="{%s util.TimeToFull(ex.Started) %}">{%s util.TimeRelative(ex.Started) %}</td>
+          </tr>
+          {%- if ex.Completed != nil -%}
+          <tr>
+            <th>Completed</th>
+            <td title="{%s util.TimeToFull(ex.Completed) %}">{%s util.TimeRelative(ex.Completed) %}</td>
+          </tr>
+          <tr>
+            <th>Exit Code</th>
+            <td>{%d ex.ExitCode %}</td>
+          </tr>
+          {%- endif -%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endfunc %}
+
+{% func ExecScript(debug bool, id string, connectURL string, terminal bool, ps *cutil.PageState, extraHandlers ...string) %}
+  <script>
+    window.addEventListener('load', () => {
+      solitaire.socketLog({%v debug %}, document.getElementById("{%s id %}"), {%v terminal %}, "{%s= connectURL %}", [{%s= strings.Join(extraHandlers, `, `) %}]);
+    })
+  </script>
+{% endfunc %}
