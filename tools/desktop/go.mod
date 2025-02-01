@@ -1,7 +1,9 @@
 // Content managed by Project Forge, see [projectforge.md] for details.
 module github.com/kyleu/solitaire/tools/desktop
 
-go 1.22
+go 1.22.7
+
+toolchain go1.22.11
 
 require (
 	github.com/kyleu/solitaire v0.0.0
