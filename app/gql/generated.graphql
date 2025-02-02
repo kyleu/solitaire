@@ -1,0 +1,7 @@
+# Enum Type [DealTo]
+
+extend type Query {
+}
+
+extend type Mutation {
+}

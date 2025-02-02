@@ -1,0 +1,2 @@
+-- {% func SeedDataAll() %}
+-- {% endfunc %}

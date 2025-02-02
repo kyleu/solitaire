@@ -1,0 +1,55 @@
+{
+  "name": "deal_to",
+  "package": "stock",
+  "group": [
+    "game",
+    "rules"
+  ],
+  "icon": "star",
+  "values": [
+    {
+      "key": "waste",
+      "name": "Waste"
+    },
+    {
+      "key": "waste-or-pair-manually",
+      "name": "Waste Or Pair Manually"
+    },
+    {
+      "key": "tableau",
+      "name": "Tableau"
+    },
+    {
+      "key": "tableau-first-set",
+      "name": "Tableau First Set"
+    },
+    {
+      "key": "tableau-if-none-empty",
+      "name": "Tableau If None Empty"
+    },
+    {
+      "key": "tableau-empty",
+      "name": "Tableau Empty"
+    },
+    {
+      "key": "tableau-non-empty",
+      "name": "Tableau Non Empty"
+    },
+    {
+      "key": "foundation",
+      "name": "Foundation"
+    },
+    {
+      "key": "reserve",
+      "name": "Reserve"
+    },
+    {
+      "key": "manually",
+      "name": "Manually"
+    },
+    {
+      "key": "never",
+      "name": "Never"
+    }
+  ]
+}
