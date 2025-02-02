@@ -1,0 +1,81 @@
+{
+  "name": "behavior",
+  "package": "pile",
+  "group": [
+    "game"
+  ],
+  "icon": "star",
+  "values": [
+    {
+      "key": "stock",
+      "name": "Stock",
+      "extra": {
+        "code": "s",
+        "weight": 0
+      }
+    },
+    {
+      "key": "waste",
+      "name": "Waste",
+      "extra": {
+        "code": "w",
+        "weight": 1
+      }
+    },
+    {
+      "key": "pocket",
+      "name": "Pocket",
+      "extra": {
+        "code": "k",
+        "weight": 0
+      }
+    },
+    {
+      "key": "foundation",
+      "name": "Foundation",
+      "extra": {
+        "code": "f",
+        "weight": 4
+      }
+    },
+    {
+      "key": "tableau",
+      "name": "Tableau",
+      "extra": {
+        "code": "t",
+        "weight": 4
+      }
+    },
+    {
+      "key": "cell",
+      "name": "Cell",
+      "extra": {
+        "code": "c",
+        "weight": 2
+      }
+    },
+    {
+      "key": "reserve",
+      "name": "Reserve",
+      "extra": {
+        "code": "r",
+        "weight": 2
+      }
+    },
+    {
+      "key": "pyramid",
+      "name": "Pyramid",
+      "extra": {
+        "code": "p",
+        "weight": 5
+      }
+    }
+  ],
+  "tags": [
+    "no-database",
+    "typescript"
+  ],
+  "config": {
+    "type:weight": "int"
+  }
+}

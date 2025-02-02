@@ -20,7 +20,7 @@
   <h3>Game</h3>
   <div style="font-size: 500%;">
     {%- for _, c := range p.Game.Deck.Cards -%}
-    <span{% if c.Suit.Color().Name() == `Red` %} style="color: red;"{% endif %}>{%s c.Unicode() %}</span>
+    <span{% if c.Suit.Color().Name == `Red` %} style="color: red;"{% endif %}>{%s c.Unicode() %}</span>
     {%- endfor -%}
   </div>
 </div>

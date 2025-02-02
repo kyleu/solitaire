@@ -8,7 +8,7 @@ import (
 )
 
 type Set struct {
-	Behavior   any            `json:"behavior"`
+	Behavior   *Behavior      `json:"behavior"`
 	Piles      Piles          `json:"piles"`
 	Hidden     bool           `json:"hidden,omitempty"`
 	Position   *util.Position `json:"position,omitempty"`

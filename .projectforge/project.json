@@ -9,6 +9,7 @@
     "core",
     "android",
     "desktop",
+    "export",
     "filesystem",
     "graphql",
     "ios",

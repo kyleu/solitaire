@@ -2,6 +2,13 @@ package rules
 
 import (
 	"github.com/kyleu/solitaire/app/game/deck"
+	"github.com/kyleu/solitaire/app/game/rules/cell"
+	"github.com/kyleu/solitaire/app/game/rules/foundation"
+	"github.com/kyleu/solitaire/app/game/rules/pyramid"
+	"github.com/kyleu/solitaire/app/game/rules/reserve"
+	"github.com/kyleu/solitaire/app/game/rules/stock"
+	"github.com/kyleu/solitaire/app/game/rules/tableau"
+	"github.com/kyleu/solitaire/app/game/rules/waste"
 )
 
 type Link struct {
@@ -27,14 +34,14 @@ type Rules struct {
 	CardRemovalMethod string        `json:"cardRemovalMethod,omitempty"`
 	DeckOptions       *deck.Options `json:"deckOptions,omitempty"`
 
-	Stock       *Stock        `json:"stock,omitempty"`
-	Waste       *Waste        `json:"waste,omitempty"`
-	Reserves    *Reserve      `json:"reserves,omitempty"`
-	Cells       *Cell         `json:"cells,omitempty"`
-	Foundations []*Foundation `json:"foundations,omitempty"`
-	Tableaus    []*Tableau    `json:"tableaus,omitempty"`
-	Pyramids    []*Pyramid    `json:"pyramids,omitempty"`
-	Special     *Special      `json:"special,omitempty"`
+	Stock       *stock.Stock             `json:"stock,omitempty"`
+	Waste       *waste.Waste             `json:"waste,omitempty"`
+	Reserves    *reserve.Reserve         `json:"reserves,omitempty"`
+	Cells       *cell.Cell               `json:"cells,omitempty"`
+	Foundations []*foundation.Foundation `json:"foundations,omitempty"`
+	Tableaus    []*tableau.Tableau       `json:"tableaus,omitempty"`
+	Pyramids    []*pyramid.Pyramid       `json:"pyramids,omitempty"`
+	Special     *Special                 `json:"special,omitempty"`
 
 	Error string `json:"error,omitempty"`
 }

@@ -57,7 +57,7 @@ func (p *HTML) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.Pa
 //line views/vgame/HTML.html:22
 		qw422016.N().S(`    <span`)
 //line views/vgame/HTML.html:23
-		if c.Suit.Color().Name() == `Red` {
+		if c.Suit.Color().Name == `Red` {
 //line views/vgame/HTML.html:23
 			qw422016.N().S(` style="color: red;"`)
 //line views/vgame/HTML.html:23

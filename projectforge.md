@@ -8,6 +8,7 @@ The following modules were used to build this project:
 - [android](./doc/module/android.md)
 - [core](./doc/module/core.md)
 - [desktop](./doc/module/desktop.md)
+- [export](./doc/module/export.md)
 - [filesystem](./doc/module/filesystem.md)
 - [graphql](./doc/module/graphql.md)
 - [ios](./doc/module/ios.md)

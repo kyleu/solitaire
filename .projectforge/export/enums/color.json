@@ -1,0 +1,60 @@
+{
+  "name": "color",
+  "package": "suit",
+  "group": [
+    "game"
+  ],
+  "icon": "star",
+  "values": [
+    {
+      "key": "red",
+      "name": "Red",
+      "extra": {
+        "code": "r"
+      }
+    },
+    {
+      "key": "black",
+      "name": "Black",
+      "extra": {
+        "code": "b"
+      }
+    },
+    {
+      "key": "green",
+      "name": "Green",
+      "extra": {
+        "code": "g"
+      }
+    },
+    {
+      "key": "blue",
+      "name": "Blue",
+      "extra": {
+        "code": "u"
+      }
+    },
+    {
+      "key": "colorless",
+      "name": "Colorless",
+      "extra": {
+        "code": "x"
+      }
+    },
+    {
+      "key": "unknown",
+      "name": "Unknown",
+      "default": true,
+      "extra": {
+        "code": "?"
+      }
+    }
+  ],
+  "tags": [
+    "no-database",
+    "typescript"
+  ],
+  "config": {
+    "identity": "code"
+  }
+}

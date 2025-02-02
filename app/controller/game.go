@@ -9,7 +9,7 @@ import (
 	"github.com/kyleu/solitaire/app/game/card"
 	"github.com/kyleu/solitaire/app/game/pile"
 	"github.com/kyleu/solitaire/app/game/poker"
-	"github.com/kyleu/solitaire/app/game/rules/gamerules"
+	"github.com/kyleu/solitaire/app/game/rules/library"
 	"github.com/kyleu/solitaire/app/game/suit"
 	"github.com/kyleu/solitaire/views"
 	"github.com/kyleu/solitaire/views/vgame"
@@ -30,7 +30,7 @@ type TestJSONResponse struct {
 
 func GameTestJSON(w http.ResponseWriter, r *http.Request) {
 	Act("game.test.json", w, r, func(as *app.State, ps *cutil.PageState) (string, error) {
-		g := game.New(gamerules.Example)
+		g := game.New(library.Example)
 		hand := pile.Pile{ID: "test", Options: &pile.Options{}, Cards: card.RandomCards(5, suit.SuitsCommon, 1)}
 		result := poker.Check(hand.Cards)
 		ret := &TestJSONResponse{Game: g, PokerHand: hand, PokerResult: result}
@@ -42,7 +42,7 @@ func GameTestJSON(w http.ResponseWriter, r *http.Request) {
 
 func GameTestHTML(w http.ResponseWriter, r *http.Request) {
 	Act("game.test.html", w, r, func(as *app.State, ps *cutil.PageState) (string, error) {
-		g := game.New(gamerules.Example)
+		g := game.New(library.Example)
 		ps.Data = g
 		ps.Title = "HTML Test"
 		return Render(r, as, &vgame.HTML{Game: g}, ps, "game", "html")
@@ -51,7 +51,7 @@ func GameTestHTML(w http.ResponseWriter, r *http.Request) {
 
 func GameTestWASM(w http.ResponseWriter, r *http.Request) {
 	Act("game.test.wasm", w, r, func(as *app.State, ps *cutil.PageState) (string, error) {
-		g := game.New(gamerules.Example)
+		g := game.New(library.Example)
 		ps.Data = g
 		ps.Title = "WASM Test"
 		return Render(r, as, &vgame.WASM{Game: g}, ps, "game", "wasm")

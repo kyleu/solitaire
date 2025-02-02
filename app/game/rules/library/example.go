@@ -1,4 +1,4 @@
-package gamerules
+package library
 
 import (
 	"github.com/kyleu/solitaire/app/game/deck"
