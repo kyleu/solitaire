@@ -2,10 +2,12 @@ package parse
 
 import (
 	"context"
+
+	"github.com/samber/lo"
+
 	"github.com/kyleu/solitaire/app/game/rules"
 	"github.com/kyleu/solitaire/app/lib/filesystem"
 	"github.com/kyleu/solitaire/app/util"
-	"github.com/samber/lo"
 )
 
 func ParseJSONRules(_ context.Context, _ util.Logger) (any, error) {

@@ -2,6 +2,9 @@ package parse
 
 import (
 	"fmt"
+
+	"github.com/samber/lo"
+
 	"github.com/kyleu/solitaire/app/game/deck"
 	"github.com/kyleu/solitaire/app/game/rules"
 	"github.com/kyleu/solitaire/app/game/rules/cell"
@@ -11,7 +14,6 @@ import (
 	"github.com/kyleu/solitaire/app/game/rules/stock"
 	"github.com/kyleu/solitaire/app/game/rules/tableau"
 	"github.com/kyleu/solitaire/app/game/rules/waste"
-	"github.com/samber/lo"
 )
 
 type JSONRules struct {

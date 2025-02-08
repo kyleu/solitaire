@@ -20,6 +20,7 @@ require (
 	github.com/gorilla/mux v1.8.1
 	github.com/gorilla/websocket v1.5.3
 	github.com/graph-gophers/graphql-go v1.5.0
+	github.com/jmoiron/sqlx v1.4.0
 	github.com/kirsle/configdir v0.0.0-20170128060238-e45d2f54772f
 	github.com/mileusna/useragent v1.3.5
 	github.com/muesli/coral v1.0.0
