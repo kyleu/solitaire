@@ -10,6 +10,6 @@ import (
 
 var parseRules = &Sandbox{Key: "parseRules", Title: "Parse Rules", Icon: "heart", Run: onParseRules}
 
-func onParseRules(ctx context.Context, as *app.State, logger util.Logger) (any, error) {
+func onParseRules(ctx context.Context, as *app.State, _ util.ValueMap, logger util.Logger) (any, error) {
 	return parse.ParseJSONRules(ctx, logger)
 }
