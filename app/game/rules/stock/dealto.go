@@ -118,7 +118,7 @@ func (d DealTos) Strings() []string {
 }
 
 func (d DealTos) Help() string {
-	return "Available deal to options: [" + strings.Join(d.Strings(), ", ") + "]"
+	return "Available deal to options: [" + util.StringJoin(d.Strings(), ", ") + "]"
 }
 
 func (d DealTos) Get(key string, logger util.Logger) DealTo {

@@ -117,7 +117,7 @@ func (b Behaviors) Strings() []string {
 }
 
 func (b Behaviors) Help() string {
-	return "Available behavior options: [" + strings.Join(b.Strings(), ", ") + "]"
+	return "Available behavior options: [" + util.StringJoin(b.Strings(), ", ") + "]"
 }
 
 func (b Behaviors) Get(key string, logger util.Logger) Behavior {

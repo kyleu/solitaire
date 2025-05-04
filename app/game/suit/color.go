@@ -114,7 +114,7 @@ func (c Colors) Strings() []string {
 }
 
 func (c Colors) Help() string {
-	return "Available color options: [" + strings.Join(c.Strings(), ", ") + "]"
+	return "Available color options: [" + util.StringJoin(c.Strings(), ", ") + "]"
 }
 
 func (c Colors) Get(key string, logger util.Logger) Color {

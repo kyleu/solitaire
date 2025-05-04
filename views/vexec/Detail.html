@@ -1,6 +1,4 @@
 {% import (
-  "strings"
-
   "github.com/kyleu/solitaire/app"
   "github.com/kyleu/solitaire/app/controller/cutil"
   "github.com/kyleu/solitaire/app/lib/exec"
@@ -87,7 +85,7 @@
 {% func ExecScript(debug bool, id string, connectURL string, terminal bool, ps *cutil.PageState, extraHandlers ...string) %}
   <script>
     window.addEventListener('load', () => {
-      solitaire.socketLog({%v debug %}, document.getElementById("{%s id %}"), {%v terminal %}, "{%s= connectURL %}", [{%s= strings.Join(extraHandlers, `, `) %}]);
+      solitaire.socketLog({%v debug %}, document.getElementById("{%s id %}"), {%v terminal %}, "{%s= connectURL %}", [{%s= util.StringJoin(extraHandlers, `, `) %}]);
     })
   </script>
 {% endfunc %}
