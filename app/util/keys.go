@@ -5,6 +5,7 @@ const (
 	AppName    = "Solitaire"
 	AppSummary = "A solitaire game... details soon"
 	AppPort    = 7777
+	AppCmd     = AppKey
 	AppContact = "Kyle U <solitaire@kyleu.com>"
 	AppURL     = "https://github.com/kyleu/solitaire"
 	AppSource  = "https://github.com/kyleu/solitaire"
