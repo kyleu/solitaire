@@ -1,5 +1,5 @@
 import "./game.css";
-import {opt} from "../dom";
+import { opt } from "../dom";
 
 export function appendLog(msg: string) {
   const panel = opt<HTMLDivElement>("#log-panel");

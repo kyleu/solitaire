@@ -1,7 +1,7 @@
 import "./game.css";
-import {Socket} from "../socket";
-import {client, GameClient, setClient} from "./client";
-import type {Message} from "./message/message";
+import { Socket } from "../socket";
+import { client, GameClient, setClient } from "./client";
+import type { Message } from "./message/message";
 
 function wasmInit(ms: number, ruleset: string) {
   setClient(new GameClient());
@@ -27,7 +27,7 @@ function websocketInit(ms: number, url: string, rs: string) {
 
   globalThis.log = (m: unknown) => console.log(m);
   globalThis.sendGameMessage = (t: string, data: { [key: string]: unknown }) => {
-    sock.send({channel: "game", cmd: "message", param: {t, data}});
+    sock.send({ channel: "game", cmd: "message", param: { t, data } });
   };
 }
 

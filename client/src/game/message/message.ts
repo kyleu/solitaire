@@ -1,4 +1,4 @@
-import type {MessageType} from "./messageType";
+import type { MessageType } from "./messageType";
 
 export class Message {
   id?: string;

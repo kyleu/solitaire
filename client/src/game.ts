@@ -1,4 +1,3 @@
-
 export function startGame() {
   // const g = new ex.Engine({
   //   width: 800,
