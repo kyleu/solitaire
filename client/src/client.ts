@@ -16,7 +16,6 @@ import { themeInit } from "./theme";
 import { timeInit } from "./time";
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface Window {
     solitaire: {
       wireTime: (el: HTMLElement) => void;
@@ -38,12 +37,12 @@ declare global {
         parentEl: HTMLElement,
         terminal: boolean,
         url: string,
-        extraHandlers: Array<(m: SocketMessage) => void>
+        extraHandlers: ((m: SocketMessage) => void)[]
       ) => void;
     };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     audit: (s: string, ...args: any) => void;
-    JSX: (tag: string, attrs: unknown[]) => HTMLElement;
+    JSX: (tag: string, attrs: Record<string, unknown>, ...args: Node[]) => HTMLElement;
   }
 }
 
