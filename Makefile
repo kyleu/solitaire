@@ -13,11 +13,13 @@ templates:
 	@bin/templates.sh
 
 .PHONY: build
+build: export GOEXPERIMENT=jsonv2
 build: templates ## Build all binaries
 	@GOOS=js GOARCH=wasm go build -o ./assets/wasm/solitaire.wasm ./app/wasm/wasm_cmd/...
 	@go build -gcflags "all=-N -l" -o build/debug/solitaire .
 
 .PHONY: build-release
+build-release: export GOEXPERIMENT=jsonv2
 build-release: templates ## Build all binaries without debug information, clean up after
 	@GOOS=js GOARCH=wasm go build -o ./assets/wasm/solitaire.wasm ./app/wasm/wasm_cmd/...
 	@go build -ldflags '-s -w' -trimpath -o build/release/solitaire .
