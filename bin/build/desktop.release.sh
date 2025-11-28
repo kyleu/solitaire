@@ -46,8 +46,8 @@ cp -R "./template/darwin/icons.icns" "./Solitaire.app/Contents/Resources/icons.i
 cp "solitaire.darwin" "./Solitaire.app/Contents/MacOS/solitaire"
 
 echo "signing amd64 desktop binary..."
-codesign -f --options=runtime --verbose=4 --deep --force --strict -s 'Developer ID Application: Kyle Unverferth (C6S478FYLD)' "./Solitaire.app/Contents/MacOS/solitaire"
-codesign -f --options=runtime --verbose=4 --deep --force --strict -s 'Developer ID Application: Kyle Unverferth (C6S478FYLD)' "./Solitaire.app"
+codesign -f --options=runtime --verbose=4 --deep --force --strict -s "${APPLE_SIGNING_IDENTITY}" "./Solitaire.app/Contents/MacOS/solitaire"
+codesign -f --options=runtime --verbose=4 --deep --force --strict -s "${APPLE_SIGNING_IDENTITY}" "./Solitaire.app"
 
 cp "./template/darwin/appdmg.config.json" "./appdmg.config.json"
 
@@ -59,8 +59,8 @@ zip -r "solitaire_${TGT}_darwin_amd64_desktop.zip" "./Solitaire.app"
 cp "solitaire.darwin.arm64" "./Solitaire.app/Contents/MacOS/solitaire"
 
 echo "signing arm64 desktop binary..."
-codesign -f --options=runtime --verbose=4 --deep --force --strict -s 'Developer ID Application: Kyle Unverferth (C6S478FYLD)' "./Solitaire.app/Contents/MacOS/solitaire"
-codesign -f --options=runtime --verbose=4 --deep --force --strict -s 'Developer ID Application: Kyle Unverferth (C6S478FYLD)' "./Solitaire.app"
+codesign -f --options=runtime --verbose=4 --deep --force --strict -s "${APPLE_SIGNING_IDENTITY}" "./Solitaire.app/Contents/MacOS/solitaire"
+codesign -f --options=runtime --verbose=4 --deep --force --strict -s "${APPLE_SIGNING_IDENTITY}" "./Solitaire.app"
 
 echo "building macOS arm64 DMG..."
 appdmg "appdmg.config.json" "./solitaire_${TGT}_darwin_arm64_desktop.dmg"
@@ -71,8 +71,8 @@ rm "./Solitaire.app/Contents/MacOS/solitaire"
 lipo -create -output "./Solitaire.app/Contents/MacOS/solitaire" solitaire.darwin solitaire.darwin.arm64
 
 echo "signing universal desktop binary..."
-codesign -f --options=runtime --verbose=4 --deep --force --strict -s 'Developer ID Application: Kyle Unverferth (C6S478FYLD)' "./Solitaire.app/Contents/MacOS/solitaire"
-codesign -f --options=runtime --verbose=4 --deep --force --strict -s 'Developer ID Application: Kyle Unverferth (C6S478FYLD)' "./Solitaire.app"
+codesign -f --options=runtime --verbose=4 --deep --force --strict -s "${APPLE_SIGNING_IDENTITY}" "./Solitaire.app/Contents/MacOS/solitaire"
+codesign -f --options=runtime --verbose=4 --deep --force --strict -s "${APPLE_SIGNING_IDENTITY}" "./Solitaire.app"
 
 echo "building macOS universal DMG..."
 appdmg "appdmg.config.json" "./solitaire_${TGT}_darwin_all_desktop.dmg"
