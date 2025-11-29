@@ -117,6 +117,12 @@ func (d DealTos) Strings() []string {
 	})
 }
 
+func (d DealTos) NamesSafe() []string {
+	return lo.Map(d, func(x DealTo, _ int) string {
+		return x.NameSafe()
+	})
+}
+
 func (d DealTos) Help() string {
 	return "Available deal to options: [" + util.StringJoin(d.Strings(), ", ") + "]"
 }

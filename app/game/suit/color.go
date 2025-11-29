@@ -113,6 +113,12 @@ func (c Colors) Strings() []string {
 	})
 }
 
+func (c Colors) NamesSafe() []string {
+	return lo.Map(c, func(x Color, _ int) string {
+		return x.NameSafe()
+	})
+}
+
 func (c Colors) Help() string {
 	return "Available color options: [" + util.StringJoin(c.Strings(), ", ") + "]"
 }

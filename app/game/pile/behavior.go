@@ -116,6 +116,12 @@ func (b Behaviors) Strings() []string {
 	})
 }
 
+func (b Behaviors) NamesSafe() []string {
+	return lo.Map(b, func(x Behavior, _ int) string {
+		return x.NameSafe()
+	})
+}
+
 func (b Behaviors) Help() string {
 	return "Available behavior options: [" + util.StringJoin(b.Strings(), ", ") + "]"
 }
