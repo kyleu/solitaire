@@ -1,8 +1,6 @@
 package rank
 
-import (
-	"github.com/kyleu/solitaire/app/util"
-)
+import "github.com/kyleu/solitaire/app/util"
 
 func (r Rank) Locations() util.Positions {
 	switch r {
