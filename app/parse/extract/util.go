@@ -8,7 +8,7 @@ import (
 )
 
 func KVFor(section string) (string, string) {
-	k, v := util.StringSplit(section, '=', true)
+	k, v := util.StringCut(section, '=', true)
 	k, v = strings.TrimSpace(k), cleanLine(v)
 	v = strings.TrimSuffix(strings.TrimPrefix(v, `"`), `"`)
 	return k, v
