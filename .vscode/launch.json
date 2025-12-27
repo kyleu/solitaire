@@ -16,7 +16,7 @@
     {
       "mode": "auto",
       "name": "Start Solitaire",
-      "program": "Solitaire",
+      "program": "main.go",
       "request": "launch",
       "substitutePath": [
         {
@@ -31,8 +31,8 @@
         "upgrade"
       ],
       "mode": "auto",
-      "name": "Start Solitaire",
-      "program": "Solitaire",
+      "name": "Upgrade Solitaire",
+      "program": "main.go",
       "request": "launch",
       "substitutePath": [
         {
