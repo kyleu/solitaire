@@ -30,8 +30,6 @@ func Search(ctx context.Context, as *app.State, params *Params, page *cutil.Page
 	}
 	allProviders = append(allProviders, testFunc)
 	// $PF_SECTION_END(search_functions)$
-
-	allProviders = append(allProviders, generatedSearch()...)
 	if len(allProviders) == 0 {
 		return nil, []error{errors.New("no search providers configured")}
 	}

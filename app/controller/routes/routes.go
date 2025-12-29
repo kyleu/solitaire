@@ -29,7 +29,6 @@ func AppRoutes(as *app.State, logger util.Logger) (http.Handler, error) {
 	makeRoute(r, http.MethodGet, cutil.DefaultSearchPath, clib.Search)
 
 	themeRoutes(r)
-	generatedRoutes(r)
 
 	// $PF_SECTION_START(routes)$
 	makeRoute(r, http.MethodGet, "/game", controller.Game)
