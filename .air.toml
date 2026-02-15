@@ -2,7 +2,7 @@
 cmd = "make build"
 bin = "build/debug/solitaire"
 args_bin = ["-v", "--addr=0.0.0.0", "all", "solitaire"]
-include_ext = ["go", "html", "graphql", "schema", "md", "mod", "sql", "js", "css"]
+include_ext = ["go", "html", "graphql", "schema", "md", "mod", "js", "css"]
 exclude_dir = ["build", "client", "gen", "tools"]
 exclude_regex = ["\\.html\\.go$", "_test\\.go$"]
 exclude_unchanged = true
