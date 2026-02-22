@@ -17,9 +17,9 @@
   {%= Gameplay(ps) %}
   {%- if p.SocketPath == "" -%}
     {%- if p.Game == nil -%}
-      {%= components.WASMScript("TODO") %}
+      {%= components.WASMScript("TODO", ps.Logger) %}
     {%- else -%}
-      {%= components.WASMScript(p.Game) %}
+      {%= components.WASMScript(p.Game, ps.Logger) %}
     {%- endif -%}
   {%- else -%}
     {% code

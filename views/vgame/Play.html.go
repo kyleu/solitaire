@@ -43,11 +43,11 @@ func (p *Play) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.Pa
 //line views/vgame/Play.html:19
 		if p.Game == nil {
 //line views/vgame/Play.html:20
-			components.StreamWASMScript(qw422016, "TODO")
+			components.StreamWASMScript(qw422016, "TODO", ps.Logger)
 //line views/vgame/Play.html:21
 		} else {
 //line views/vgame/Play.html:22
-			components.StreamWASMScript(qw422016, p.Game)
+			components.StreamWASMScript(qw422016, p.Game, ps.Logger)
 //line views/vgame/Play.html:23
 		}
 //line views/vgame/Play.html:24

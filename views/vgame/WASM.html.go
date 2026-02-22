@@ -60,7 +60,7 @@ func (p *WASM) StreamBody(qw422016 *qt422016.Writer, as *app.State, ps *cutil.Pa
 </script>
 `)
 //line views/vgame/WASM.html:29
-	components.StreamWASMScript(qw422016, p.Game)
+	components.StreamWASMScript(qw422016, p.Game, ps.Logger)
 //line views/vgame/WASM.html:29
 	qw422016.N().S(`
 `)
