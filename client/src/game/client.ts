@@ -2,7 +2,7 @@ import "./game.css";
 import { opt, req } from "../dom";
 import { appendLog } from "./util";
 
-declare const sendGameMessage: (t: string, data: { [key: string]: unknown }) => void;
+declare const sendGameMessage: (t: string, data: Record<string, unknown>) => void;
 declare const log: (msg: string) => void;
 
 export class GameClient {

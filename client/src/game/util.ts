@@ -12,7 +12,7 @@ export function appendLog(msg: string) {
     row.append(numTH, textTD);
     panel.append(row);
     const c = document.getElementById("content");
-    c.scrollTo(0, c.scrollHeight);
+    c?.scrollTo(0, c.scrollHeight);
   } else {
     console.log("[no-log-panel]: " + msg);
   }

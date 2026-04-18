@@ -26,5 +26,5 @@ if (watch) {
   console.log("esbuild: watching for changes...");
 } else {
   await esbuild.build(options);
-  await esbuild.build({...options, entryPoints: ["src/game/game.ts"], outfile: "../assets/game.js"});
+  await esbuild.build({ ...options, entryPoints: ["src/game/game.ts"], outfile: "../assets/game.js" });
 }
