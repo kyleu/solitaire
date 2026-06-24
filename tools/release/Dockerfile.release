@@ -17,4 +17,6 @@ WORKDIR /
 
 ENTRYPOINT ["/solitaire", "-a", "0.0.0.0"]
 
-COPY solitaire /
+ARG TARGETPLATFORM
+
+COPY $TARGETPLATFORM/solitaire /
